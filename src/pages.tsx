@@ -1074,49 +1074,64 @@ export function Home() {
     }
   ]
 
+  const portalColors = [
+    { icon: 'rgba(217,119,6,0.1)', border: '#D97706', text: '#92400E' },
+    { icon: 'rgba(45,106,79,0.1)', border: '#2D6A4F', text: '#14532D' },
+    { icon: 'rgba(14,165,233,0.1)', border: '#0EA5E9', text: '#0369A1' },
+    { icon: 'rgba(147,51,234,0.1)', border: '#9333EA', text: '#581C87' },
+  ]
+
   return (
     <>
       {/* 1. Main Hero Portal Section */}
-      <section className="shell py-16 md:py-24 text-center max-w-4xl mx-auto space-y-8">
-        <div className="space-y-4">
-          <p className="eyebrow uppercase tracking-widest text-xs font-bold text-margin/90">
-            {lang === 'es' ? 'Información y herramientas de derechos de inquilinos en NJ' : 'NJ Tenant Rights Portal & Tools'}
-          </p>
-          <h1 className="text-4xl md:text-5xl font-black text-ink leading-tight">
-            {lang === 'es' ? 'Centro de Defensa de Inquilinos de Nueva Jersey' : 'New Jersey Eviction Defense & Tenant Rights'}
-          </h1>
-          <p className="text-lg text-margin/80 max-w-2xl mx-auto leading-relaxed">
-            {lang === 'es'
-              ? 'Herramientas gratuitas y privadas para ayudarlo a proteger su hogar. Seleccione lo que necesita a continuación para comenzar.'
-              : 'Free, private tools to help you defend your home against eviction. Select what you need below to start immediately.'}
-          </p>
-        </div>
+      <section className="hero-gradient relative overflow-hidden">
+        {/* Subtle decorative blob */}
+        <div style={{position:'absolute',top:'-10rem',right:'-6rem',width:'36rem',height:'36rem',borderRadius:'50%',background:'radial-gradient(circle,rgba(45,106,79,0.07) 0%,transparent 70%)',pointerEvents:'none'}} />
+        <div className="shell py-16 md:py-28 text-center max-w-4xl mx-auto space-y-8 relative">
+          <div className="space-y-5">
+            <span className="badge-emerald inline-flex">
+              <ShieldIcon className="w-3 h-3" />
+              {lang === 'es' ? 'Portal de Derechos de Inquilinos NJ' : 'NJ Tenant Rights Portal'}
+            </span>
+            <h1 className="gradient-text">
+              {lang === 'es' ? 'Defiende Tu Hogar en Nueva Jersey' : 'Defend Your Home in New Jersey'}
+            </h1>
+            <p className="text-lg text-ink/70 max-w-2xl mx-auto leading-relaxed font-medium">
+              {lang === 'es'
+                ? 'Herramientas gratuitas y privadas para defenderse del desalojo. Seleccione su situación a continuación.'
+                : 'Free, private tools to fight eviction. AI-powered calculators, legal letters, and court prep — all in one place.'}
+            </p>
+          </div>
 
-        {/* 4 Large Clean Portal Cards */}
-        <div className="grid gap-6 sm:grid-cols-2 mt-10">
-          {portalCards.map((c, i) => (
-            <Link
-              key={i}
-              to={c.link}
-              className={`flex flex-col justify-between text-left p-6 border-2 border-rule rounded-2xl shadow-3xs hover:shadow-md hover:scale-[1.01] transition-all duration-200 group cursor-pointer ${c.color}`}
-            >
-              <div className="space-y-2">
-                <h3 className="text-md font-bold text-ink flex items-center justify-between">
-                  <span className="flex items-center gap-2.5">
-                    {c.icon}
-                    <span>{c.title}</span>
+          {/* 4 Premium Portal Cards */}
+          <div className="grid gap-4 sm:gap-5 sm:grid-cols-2 mt-10 text-left">
+            {portalCards.map((c, i) => (
+              <Link
+                key={i}
+                to={c.link}
+                className="portal-card group cursor-pointer"
+                style={{border:`1.5px solid ${portalColors[i].border}22`, background:'#fff'}}
+              >
+                <div className="p-6">
+                  <div className="flex items-start justify-between mb-3">
+                    <div style={{padding:'0.65rem',background:portalColors[i].icon,borderRadius:'0.6rem'}}>
+                      {c.icon}
+                    </div>
+                    <span className="portal-arrow mt-1" style={{color:portalColors[i].border}}>
+                      <DirectionsIcon className="w-5 h-5" />
+                    </span>
+                  </div>
+                  <h3 className="font-bold text-ink text-base leading-tight mb-1.5">{c.title}</h3>
+                  <p className="text-xs leading-relaxed text-ink/60 font-medium">{c.desc}</p>
+                </div>
+                <div style={{padding:'0.75rem 1.5rem',borderTop:`1px solid ${portalColors[i].border}18`,background:`${portalColors[i].icon}`,borderRadius:'0 0 1rem 1rem'}}>
+                  <span style={{fontSize:'0.7rem',fontWeight:700,textTransform:'uppercase',letterSpacing:'0.07em',color:portalColors[i].text}}>
+                    {lang === 'es' ? 'Abrir →' : 'Open Tool →'}
                   </span>
-                  <DirectionsIcon className="w-4 h-4 text-margin transition group-hover:translate-x-1" />
-                </h3>
-                <p className="text-xs leading-relaxed text-margin/80 font-medium">
-                  {c.desc}
-                </p>
-              </div>
-              <div className="mt-4 text-[11px] font-bold text-ink underline group-hover:text-margin">
-                {lang === 'es' ? 'Abrir Herramienta →' : 'Launch Tool →'}
-              </div>
-            </Link>
-          ))}
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 

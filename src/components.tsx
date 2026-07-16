@@ -303,23 +303,31 @@ export function Layout({ children }: { children: ReactNode }) {
       <a className="skip-link" href="#main">Skip to main content</a>
 
       {/* Emergency Alert Banner */}
-      <div className="emergency-lockout-banner bg-red-700 text-paper py-2.5 text-xs sm:text-sm font-semibold tracking-wide shadow-sm px-4">
+      <div className="emergency-lockout-banner" style={{background:'linear-gradient(90deg,#7f1d1d 0%,#991b1b 50%,#7f1d1d 100%)',color:'#FFF7F7',padding:'0.6rem 0',fontSize:'0.8rem',fontWeight:700,letterSpacing:'0.01em'}}>
         <div className="shell flex items-center justify-between gap-3">
-          <span className="flex items-center gap-1.5 text-left leading-normal">
-            <WarningIcon className="w-4 h-4 shrink-0" />
-            {t('emergency_banner_text')}
+          <span className="flex items-center gap-2 leading-normal">
+            <span style={{display:'inline-flex',alignItems:'center',gap:'0.3rem',background:'rgba(255,255,255,0.15)',border:'1px solid rgba(255,255,255,0.25)',borderRadius:'999px',padding:'0.15rem 0.5rem',fontSize:'0.65rem',fontWeight:800,letterSpacing:'0.08em',textTransform:'uppercase'}}>
+              <WarningIcon className="w-3 h-3" />
+              URGENT
+            </span>
+            <span className="text-red-100">{t('emergency_banner_text')}</span>
           </span>
-          <Link to="/know-your-rights" className="underline whitespace-nowrap text-paper hover:text-green-200 font-bold ml-2 shrink-0">
+          <Link to="/know-your-rights" className="whitespace-nowrap font-bold ml-2 shrink-0 text-white hover:text-red-100 flex items-center gap-1" style={{borderBottom:'1px solid rgba(255,255,255,0.4)',paddingBottom:'1px'}}>
             {lang === 'es' ? 'Ver mis derechos' : 'See My Rights'} →
           </Link>
         </div>
       </div>
 
-      <header className="border-b border-rule bg-paper">
-        <div className="shell flex items-center justify-between gap-4 py-5">
-          <Link to="/" className="flex items-center gap-2 text-lg font-semibold tracking-tight active:scale-97 transition">
-            <img src="/icon.svg" className="h-7 w-7 object-contain" alt="" />
-            <span>{t('home_title')}</span>
+      <header className="border-b border-rule" style={{background:'rgba(247,245,239,0.95)',backdropFilter:'blur(12px)',WebkitBackdropFilter:'blur(12px)',position:'sticky',top:0,zIndex:30}}>
+        <div className="shell flex items-center justify-between gap-4 py-4">
+          <Link to="/" className="flex items-center gap-2.5 active:scale-97 transition">
+            <div style={{width:36,height:36,borderRadius:'0.5rem',background:'linear-gradient(135deg,#2D6A4F,#17243A)',display:'flex',alignItems:'center',justifyContent:'center',boxShadow:'0 2px 8px rgba(45,106,79,0.25)'}}>
+              <img src="/icon.svg" className="h-5 w-5 object-contain" style={{filter:'brightness(0) invert(1)'}} alt="" />
+            </div>
+            <div>
+              <span className="font-bold text-ink text-base leading-none block" style={{fontFamily:'var(--font-display)'}}>{t('home_title')}</span>
+              <span className="text-margin text-[10px] font-semibold uppercase tracking-widest">NJ Tenant Defense</span>
+            </div>
           </Link>
           
           {/* Desktop Navigation Top-Right preferences */}
@@ -369,21 +377,22 @@ export function Layout({ children }: { children: ReactNode }) {
         </div>
 
         {/* Desktop Navigation Link row */}
-        <nav aria-label="Main navigation" className="hidden md:flex shell gap-5 overflow-x-auto pb-4 text-sm whitespace-nowrap">
+        <nav aria-label="Main navigation" className="hidden md:flex shell gap-1 overflow-x-auto pb-4 text-sm whitespace-nowrap">
           {nav.map(([label, path]) => (
             <NavLink
               key={path as string}
               to={path as string}
-              className={({ isActive }) => (isActive ? 'text-margin underline underline-offset-4 font-semibold' : 'text-ink hover:text-margin')}
+              className={({ isActive }) => `px-3 py-1.5 rounded-lg font-semibold transition-colors ${ isActive ? 'bg-ink/8 text-margin' : 'text-ink/70 hover:text-ink hover:bg-ink/5'}`}
             >
               {label as string}
             </NavLink>
           ))}
+          <span className="w-px bg-rule mx-1 self-stretch" />
           {secondaryNav.map(([label, path]) => (
             <NavLink
               key={path}
               to={path}
-              className={({ isActive }) => (isActive ? 'text-margin underline underline-offset-4 font-semibold' : 'text-ink hover:text-margin')}
+              className={({ isActive }) => `px-3 py-1.5 rounded-lg font-semibold transition-colors ${ isActive ? 'bg-ink/8 text-margin' : 'text-ink/60 hover:text-ink hover:bg-ink/5'}`}
             >
               {label}
             </NavLink>
@@ -410,20 +419,20 @@ export function Layout({ children }: { children: ReactNode }) {
       </footer>
 
       {/* --- Mobile UI Bottom Navigation Bar (Visible on mobile screens) --- */}
-      <nav className="mobile-bottom-nav md:hidden fixed bottom-0 left-0 right-0 z-40 bg-paper border-t border-rule flex justify-around items-center py-2 shadow-lg">
-        <NavLink to="/" className={({ isActive }) => `flex flex-col items-center gap-1 text-4xs font-bold transition active:scale-95 ${isActive ? 'text-margin' : 'text-ink/60'}`}>
+      <nav className="mobile-bottom-nav md:hidden fixed bottom-0 left-0 right-0 z-40 flex justify-around items-center px-2 pb-safe">
+        <NavLink to="/" className={({ isActive }) => `flex flex-col items-center gap-0.5 py-2 px-3 rounded-xl text-4xs font-bold transition-all active:scale-95 ${isActive ? 'text-margin bg-margin/8' : 'text-ink/50 hover:text-ink/80'}`}>
           <HomeIcon className="w-5.5 h-5.5" />
           <span>{lang === 'es' ? 'Inicio' : 'Home'}</span>
         </NavLink>
         {nav.map(([label, path, icon]) => (
-          <NavLink key={path as string} to={path as string} className={({ isActive }) => `flex flex-col items-center gap-1 text-4xs font-bold transition active:scale-95 ${isActive ? 'text-margin' : 'text-ink/60'}`}>
+          <NavLink key={path as string} to={path as string} className={({ isActive }) => `flex flex-col items-center gap-0.5 py-2 px-3 rounded-xl text-4xs font-bold transition-all active:scale-95 ${isActive ? 'text-margin bg-margin/8' : 'text-ink/50 hover:text-ink/80'}`}>
             {icon as ReactNode}
             <span>{label as string}</span>
           </NavLink>
         ))}
         <button
           onClick={() => setDrawerOpen(true)}
-          className="flex flex-col items-center gap-1 text-4xs font-bold text-ink/60 transition active:scale-95 cursor-pointer"
+          className="flex flex-col items-center gap-0.5 py-2 px-3 rounded-xl text-4xs font-bold text-ink/50 transition-all active:scale-95 cursor-pointer hover:text-ink/80"
         >
           <MenuIcon className="w-5.5 h-5.5" />
           <span>{lang === 'es' ? 'Más' : 'More'}</span>
@@ -431,9 +440,12 @@ export function Layout({ children }: { children: ReactNode }) {
       </nav>
 
       {/* --- Mobile "More" Drawer Slide-up bottom sheet --- */}
-      <div className={`bottom-sheet-backdrop fixed inset-0 z-40 bg-ink/40 backdrop-blur-xs transition duration-200 md:hidden ${drawerOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`} onClick={() => setDrawerOpen(false)} />
-      <div className={`bottom-sheet-drawer fixed bottom-0 left-0 right-0 z-50 bg-paper border-t border-rule rounded-t-xl p-6 shadow-2xl transition-transform duration-300 transform md:hidden ${drawerOpen ? 'translate-y-0' : 'translate-y-full'}`}>
-        <div className="flex justify-between items-center mb-6">
+      <div className={`bottom-sheet-backdrop fixed inset-0 z-40 transition duration-200 md:hidden ${drawerOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`} onClick={() => setDrawerOpen(false)} />
+      <div className={`bottom-sheet-drawer fixed bottom-0 left-0 right-0 z-50 bg-paper rounded-t-2xl p-6 shadow-2xl transition-transform duration-300 transform md:hidden ${drawerOpen ? 'translate-y-0' : 'translate-y-full'}`}>
+        {/* Drag handle */}
+        <div className="flex justify-center mb-5">
+          <div style={{width:'2.5rem',height:'4px',borderRadius:'999px',background:'var(--color-rule)'}} />
+        </div>
           <h3 className="text-md font-bold uppercase tracking-wider text-ink">{lang === 'es' ? 'Herramientas Adicionales' : 'Additional Tools'}</h3>
           <button onClick={() => setDrawerOpen(false)} className="text-ink/60 hover:text-ink cursor-pointer active:scale-95 p-1 rounded-full bg-rule/20">
             <CloseIcon className="w-5 h-5" />
