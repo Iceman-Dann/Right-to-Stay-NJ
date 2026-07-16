@@ -1,0 +1,7 @@
+- [x] Create legal glossary definition database `src/data/glossary.ts`
+- [x] Add glossary translations in `src/data/translations.ts`
+- [x] Implement `<GlossaryTerm>` component and font-size contextual settings in `src/components.tsx`
+- [x] Build the interactive **Eviction Triage Wizard** on the Home page in `src/pages.tsx`
+- [x] Integrate glossary terms inside notice descriptions and rights pages in `src/pages.tsx`
+- [x] Add accessibility themes, tooltip indicators, wizard screens, and large font styles in `src/styles.css`
+- [x] Run typescript checks and production build to verify all components function correctly

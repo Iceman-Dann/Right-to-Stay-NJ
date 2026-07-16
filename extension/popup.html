@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Right to Stay NJ</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      width: 440px;
+      min-height: 560px;
+      max-height: 640px;
+      background: #fafaf8;
+      color: #1c2b3a;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    .header {
+      background: #1c2b3a;
+      color: #fafaf8;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 2px solid #3d6b52;
+    }
+    .header-logo {
+      width: 36px;
+      height: 36px;
+      background: white;
+      border-radius: 8px;
+      padding: 4px;
+      object-fit: contain;
+    }
+    .header-text h1 {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .header-text p {
+      font-size: 11px;
+      opacity: 0.7;
+      margin-top: 2px;
+    }
+
+    /* Emergency Alert Bar */
+    .emergency-banner {
+      background: #b91c1c;
+      color: white;
+      padding: 8px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.4;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    /* Chat panel */
+    #chat-panel {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-height: 0;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid #e2e8f0;
+      background: white;
+    }
+    .tab {
+      flex: 1;
+      padding: 12px 10px;
+      font-size: 12.5px;
+      font-weight: 700;
+      text-align: center;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      color: #64748b;
+      transition: all 0.2s;
+      border-bottom: 3px solid transparent;
+    }
+    .tab.active {
+      color: #1c2b3a;
+      border-bottom-color: #3d6b52;
+      background: rgba(61, 107, 82, 0.03);
+    }
+
+    /* Notice explainer */
+    #notice-tab {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow-y: auto;
+      max-height: 520px;
+    }
+    .notice-textarea {
+      width: 100%;
+      height: 110px;
+      padding: 12px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 12px;
+      line-height: 1.5;
+      resize: none;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+      background: white;
+    }
+    .notice-textarea:focus { border-color: #3d6b52; }
+    
+    .btn-explain {
+      padding: 11px;
+      background: #3d6b52;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.1s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .btn-explain:hover { background-color: #2f5440; }
+    .btn-explain:active { transform: scale(0.98); }
+    .btn-explain:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .notice-result {
+      background: white;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 12.5px;
+      line-height: 1.6;
+      max-height: 220px;
+      overflow-y: auto;
+      color: #1c2b3a;
+    }
+
+    /* Action Buttons row */
+    .result-actions {
+      display: flex;
+      gap: 8px;
+    }
+    .btn-action-outline {
+      flex: 1;
+      padding: 8px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #1c2b3a;
+      background: white;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-action-outline:hover {
+      background: #f1f5f9;
+      border-color: #94a3b8;
+    }
+
+    /* Chat tab */
+    #chat-tab {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-height: 0;
+    }
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 240px;
+      max-height: 340px;
+      background: #fafaf8;
+    }
+    .chat-bubble {
+      max-width: 88%;
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-size: 12.5px;
+      line-height: 1.55;
+    }
+    .chat-bubble.user {
+      background: #1c2b3a;
+      color: white;
+      align-self: flex-end;
+      border-bottom-right-radius: 3px;
+    }
+    .chat-bubble.assistant {
+      background: white;
+      border: 1.5px solid #e2e8f0;
+      color: #1c2b3a;
+      align-self: flex-start;
+      border-bottom-left-radius: 3px;
+    }
+    .chat-bubble.loading {
+      background: white;
+      border: 1.5px solid #e2e8f0;
+      align-self: flex-start;
+    }
+    .dots { display: flex; gap: 4px; align-items: center; height: 14px; }
+    .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #94a3b8;
+      animation: bounce 1.2s ease-in-out infinite;
+    }
+    .dot:nth-child(2) { animation-delay: 0.15s; }
+    .dot:nth-child(3) { animation-delay: 0.3s; }
+    @keyframes bounce {
+      0%, 80%, 100% { transform: translateY(0); opacity: 0.5; }
+      40% { transform: translateY(-4px); opacity: 1; }
+    }
+
+    .chat-input-row {
+      display: flex;
+      gap: 8px;
+      padding: 12px 16px 16px;
+      border-top: 1px solid #e2e8f0;
+      background: white;
+    }
+    .chat-input {
+      flex: 1;
+      padding: 10px 12px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 13px;
+      font-family: inherit;
+      outline: none;
+      resize: none;
+      height: 38px;
+      transition: border-color 0.2s;
+    }
+    .chat-input:focus { border-color: #3d6b52; }
+    .btn-send {
+      padding: 8px 16px;
+      background: #1c2b3a;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.1s;
+      white-space: nowrap;
+    }
+    .btn-send:hover { background-color: #121c27; }
+    .btn-send:active { transform: scale(0.98); }
+    .btn-send:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* Footer */
+    .footer {
+      padding: 10px 16px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #e2e8f0;
+      background: #fafaf8;
+    }
+    .footer-disclaimer {
+      font-size: 10.5px;
+      color: #64748b;
+      line-height: 1.4;
+    }
+    .footer-link {
+      font-size: 11px;
+      font-weight: 700;
+      color: #3d6b52;
+      text-decoration: none;
+    }
+    .footer-link:hover { text-decoration: underline; }
+
+    /* Lang toggle */
+    .lang-toggle {
+      display: flex;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      overflow: hidden;
+      background: white;
+    }
+    .lang-btn {
+      padding: 5px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      background: transparent;
+      color: #64748b;
+      transition: background 0.15s, color 0.15s;
+    }
+    .lang-btn.active { background: #1c2b3a; color: white; }
+
+    .hidden { display: none !important; }
+    .disclaimer-bar {
+      background: #fef3c7;
+      border-bottom: 1px solid #fde68a;
+      padding: 8px 16px;
+      font-size: 11px;
+      color: #92400e;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <div class="header">
+    <img src="icons/icon-48.png" class="header-logo" alt="Logo" />
+    <div class="header-text">
+      <h1>Right to Stay NJ</h1>
+      <p>AI Tenant Rights Assistant</p>
+    </div>
+    <div style="margin-left: auto;">
+      <div class="lang-toggle">
+        <button class="lang-btn active" id="btn-en">EN</button>
+        <button class="lang-btn" id="btn-es">ES</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NJ Emergency Lockout warning bar -->
+  <div class="emergency-banner" id="lockout-warning-bar">
+    <svg style="width:14px; height:14px; margin-top:2px; flex-shrink:0;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg>
+    <span style="flex:1; margin-left:4px;"><strong>Locked out?</strong> A landlord changing locks, cutting utilities, or removing doors without a court officer violates N.J.S.A. 2A:39-1. Call 911 immediately.</span>
+  </div>
+
+  <!-- Setup Panel Placeholder -->
+  <div id="setup-panel" class="hidden"></div>
+
+  <!-- Chat Panel -->
+  <div id="chat-panel" class="hidden">
+    <!-- Disclaimer -->
+    <div class="disclaimer-bar" id="disclaimer">
+      <svg style="width:14px; height:14px; display:inline-block; vertical-align:middle; margin-right:4px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 111.063.852l-.708 2.836a.75.75 0 001.063.852l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12v8.25z"/></svg>
+      <strong id="disc-strong">General info, not legal advice.</strong>
+      <span id="disc-text"> Call LSNJLAW free: <strong><a href="tel:18885765529" style="color:#92400e">1-888-576-5529</a></strong></span>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab active" id="tab-chat-btn">
+        <svg style="width:13px; height:13px; display:inline-block; vertical-align:middle; margin-right:4px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379L12 21.75V16.5m-6-12h10.5A2.25 2.25 0 0118.75 6.75V16.5a2.25 2.25 0 01-2.25 2.25H12h-3L3.75 21.75V16.5a2.25 2.25 0 01-2.25-2.25V6.75A2.25 2.25 0 013.75 4.5z"/></svg>
+        <span id="chat-tab-label">Ask a Question</span>
+      </button>
+      <button class="tab" id="tab-notice-btn">
+        <svg style="width:13px; height:13px; display:inline-block; vertical-align:middle; margin-right:4px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+        <span id="notice-tab-label">Explain Notice</span>
+      </button>
+      <button class="tab" id="tab-checklist-btn">
+        <svg style="width:13px; height:13px; display:inline-block; vertical-align:middle; margin-right:4px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.03 0 1.9.693 2.166 1.638m-7.377 0A48.536 48.536 0 0112 3m0 0c2.917 0 5.747.294 8.5.862m-2.1 3.393v11.25a2.25 2.25 0 01-2.25 2.25H9a2.25 2.25 0 01-2.25-2.25V7.875A2.25 2.25 0 019 5.625h5.25a2.25 2.25 0 012.25 2.25z"/></svg>
+        <span id="checklist-tab-label">My Checklist</span>
+      </button>
+    </div>
+
+    <!-- Chat Tab -->
+    <div id="chat-tab">
+      <div class="chat-messages" id="chat-messages">
+        <div class="chat-bubble assistant" id="welcome-msg">
+          <strong>Welcome!</strong> I'm your NJ tenant rights assistant. Ask me anything about eviction notices, your rights, or the court process.
+        </div>
+      </div>
+      <div class="chat-input-row">
+        <textarea class="chat-input" id="chat-input" rows="1" placeholder="Ask about your rights..."></textarea>
+        <button class="btn-send" id="btn-send">Send</button>
+      </div>
+    </div>
+
+    <!-- Notice Explainer Tab -->
+    <div id="notice-tab" class="hidden">
+      <button class="btn-explain" id="btn-analyze-page" style="background: #1c2b3a;">
+        <svg style="width:14px; height:14px; margin-right:4px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.602 10.602z"/></svg>
+        <span>Analyze Current Page</span>
+      </button>
+      <div style="text-align: center; font-size: 11px; color: #94a3b8; font-weight: 600; margin: 4px 0;">— OR PASTE TEXT —</div>
+      <textarea class="notice-textarea" id="notice-text" placeholder="Paste the text from your eviction notice here..."></textarea>
+      <button class="btn-explain" id="btn-explain">
+        <svg style="width:14px; height:14px; margin-right:4px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.602 10.602z"/></svg>
+        <span>Explain Pasted Text</span>
+      </button>
+      
+      <div id="notice-result" class="notice-result hidden"></div>
+      
+      <!-- Result actions -->
+      <div id="result-actions" class="result-actions hidden">
+        <button class="btn-action-outline" id="btn-copy">
+          <svg style="width:13px; height:13px; display:inline-block; vertical-align:middle; margin-right:4px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H5.25m11.9-3.664A2.251 2.251 0 0015 2.25h-3a2.251 2.251 0 00-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6V4.5c0-.231.035-.454.1-.664M6.75 7.875V18a2.25 2.25 0 002.25 2.25h5.25a2.25 2.25 0 002.25-2.25V7.875a2.25 2.25 0 00-2.25-2.25H9a2.25 2.25 0 00-2.25 2.25z"/></svg>
+          <span>Copy Analysis</span>
+        </button>
+        <button class="btn-action-outline" id="btn-print">
+          <svg style="width:13px; height:13px; display:inline-block; vertical-align:middle; margin-right:4px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6.72 19.164l-.22-1.22A2.25 2.25 0 018.68 15.5H15.3a2.25 2.25 0 012.18 2.44l-.22 1.22M18 19.164a2.25 2.25 0 01-2.25 2.25H8.25A2.25 2.25 0 016 19.164m12 0v-.392A2.25 2.25 0 0015.3 16.5H8.7a2.25 2.25 0 00-2.7 2.272v.392m12 0a2.25 2.25 0 002.25-2.25V9.75A2.25 2.25 0 0017.25 7.5H6.75A2.25 2.25 0 004.5 9.75v7.164a2.25 2.25 0 002.25 2.25M16.5 7.5V3.75A1.5 1.5 0 0015 2.25H9A1.5 1.5 0 007.5 3.75V7.5"/></svg>
+          <span>Save/Print PDF</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Checklist Tab -->
+    <div id="checklist-tab" class="hidden" style="padding: 16px; display: flex; flex-direction: column; gap: 12px; overflow-y: auto; max-height: 520px;">
+      <h3 style="font-size: 13.5px; font-weight: 700; color: #1c2b3a; margin-bottom: 2px;">Your Eviction Defense Checklist</h3>
+      <p style="font-size: 11.5px; color: #64748b; line-height: 1.4; margin-bottom: 6px;">
+        Steps customize dynamically based on your notice analysis. Check off completed items to stay on track.
+      </p>
+      
+      <!-- Interactive Checklist Container -->
+      <div id="checklist-items-container" style="display: flex; flex-direction: column; gap: 8px;">
+        <!-- Startup standard tasks -->
+        <div style="display: flex; gap: 8px; align-items: flex-start; background: white; padding: 10px; border: 1.5px solid #cbd5e1; border-radius: 8px; font-size: 12px; line-height: 1.4;">
+          <input type="checkbox" id="chk-standard-1" style="margin-top: 2px; cursor: pointer;" />
+          <label for="chk-standard-1" style="flex:1; cursor: pointer;">Call LSNJLAW Legal Aid hotline at <a href="tel:18885765529" style="color: #3d6b52; font-weight: 700;">1-888-576-5529</a></label>
+        </div>
+        <div style="display: flex; gap: 8px; align-items: flex-start; background: white; padding: 10px; border: 1.5px solid #cbd5e1; border-radius: 8px; font-size: 12px; line-height: 1.4;">
+          <input type="checkbox" id="chk-standard-2" style="margin-top: 2px; cursor: pointer;" />
+          <label for="chk-standard-2" style="flex:1; cursor: pointer;">Gather all rent receipts, bank statements, lease contracts, and payment records.</label>
+        </div>
+        <div style="display: flex; gap: 8px; align-items: flex-start; background: white; padding: 10px; border: 1.5px solid #cbd5e1; border-radius: 8px; font-size: 12px; line-height: 1.4;">
+          <input type="checkbox" id="chk-standard-3" style="margin-top: 2px; cursor: pointer;" />
+          <label for="chk-standard-3" style="flex:1; cursor: pointer;">Photograph any document/notice posted on your door with date and time proof.</label>
+        </div>
+      </div>
+
+      <!-- County Directory / Court address widget -->
+      <div style="margin-top: 14px; border-top: 1px solid #e2e8f0; padding-top: 14px;">
+        <h3 style="font-size: 13.5px; font-weight: 700; color: #1c2b3a; margin-bottom: 2px;">Find Your Filing Courthouse</h3>
+        <p style="font-size: 11.5px; color: #64748b; line-height: 1.4; margin-bottom: 8px;">
+          Select your New Jersey County to find where to file your Answer or get emergency stays:
+        </p>
+        <select id="county-selector" style="width: 100%; padding: 8px; border: 1.5px solid #cbd5e1; border-radius: 6px; font-size: 12px; outline: none; background: white;">
+          <option value="">-- Select Your NJ County --</option>
+          <option value="Bergen">Bergen County</option>
+          <option value="Burlington">Burlington County</option>
+          <option value="Camden">Camden County</option>
+          <option value="Essex">Essex County</option>
+          <option value="Gloucester">Gloucester County</option>
+          <option value="Hudson">Hudson County</option>
+          <option value="Mercer">Mercer County</option>
+          <option value="Middlesex">Middlesex County</option>
+          <option value="Monmouth">Monmouth County</option>
+          <option value="Ocean">Ocean County</option>
+          <option value="Passaic">Passaic County</option>
+          <option value="Union">Union County</option>
+        </select>
+        <div id="county-court-info" class="hidden" style="margin-top: 10px; background: rgba(61,107,82,0.05); border: 1px solid rgba(61,107,82,0.2); border-radius: 8px; padding: 12px; font-size: 12px; line-height: 1.5;">
+          <strong id="court-org" style="display:block; color:#3d6b52; margin-bottom:2px;"></strong>
+          <span style="display:flex; align-items:center; gap:4px; margin-bottom:4px;"><svg style="width:12px; height:12px; display:inline-block; flex-shrink:0;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25s-7.5-4.108-7.5-11.25a7.5 7.5 0 1115 0z"/></svg><span id="court-address"></span></span>
+          <span style="display:flex; align-items:center; gap:4px;"><svg style="width:12px; height:12px; display:inline-block; flex-shrink:0;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-2.902-1.63-5.275-4.002-6.908-6.909l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg><span>Phone: </span><a id="court-phone" href="" style="color:#3d6b52; font-weight:700; text-decoration:none;"></a></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <button id="btn-reset" style="background:none; border:none; color:#b91c1c; font-size:10.5px; font-weight:700; cursor:pointer; outline:none; font-family:inherit; display:flex; align-items:center; gap:3px;"><svg style="width:11px; height:11px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg><span>Reset Data</span></button>
+    <span class="footer-disclaimer" id="footer-disc">Not legal advice • NJ law only</span>
+    <a class="footer-link" href="http://localhost:5173/ai-assistant" target="_blank" id="footer-link">Open Full App →</a>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

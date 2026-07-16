@@ -1,0 +1,34 @@
+{
+  "name": "right-to-stay-nj",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.45.2",
+    "pg": "^8.22.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-router-dom": "6.30.1",
+    "swr": "^2.4.2",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "4.1.11",
+    "@types/pg": "^8.20.0",
+    "@types/react": "18.3.23",
+    "@types/react-dom": "18.3.7",
+    "@vercel/node": "^5.8.24",
+    "@vitejs/plugin-react": "4.6.0",
+    "dotenv": "^17.4.2",
+    "tailwindcss": "4.1.11",
+    "typescript": "5.7.3",
+    "vite": "7.0.4",
+    "vitest": "^4.1.10"
+  }
+}
