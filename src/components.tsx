@@ -446,6 +446,7 @@ export function Layout({ children }: { children: ReactNode }) {
         <div className="flex justify-center mb-5">
           <div style={{width:'2.5rem',height:'4px',borderRadius:'999px',background:'var(--color-rule)'}} />
         </div>
+        <div className="flex justify-between items-center mb-6">
           <h3 className="text-md font-bold uppercase tracking-wider text-ink">{lang === 'es' ? 'Herramientas Adicionales' : 'Additional Tools'}</h3>
           <button onClick={() => setDrawerOpen(false)} className="text-ink/60 hover:text-ink cursor-pointer active:scale-95 p-1 rounded-full bg-rule/20">
             <CloseIcon className="w-5 h-5" />
