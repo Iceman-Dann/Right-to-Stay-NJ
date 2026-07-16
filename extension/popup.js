@@ -192,13 +192,8 @@ async function fetchFromUrl(url, message, historyList) {
 }
 
 async function callBackend(message, historyList) {
-  // Attempt to hit 127.0.0.1, fallback to localhost to handle all resolution contexts
-  try {
-    return await fetchFromUrl('http://127.0.0.1:3001/api/ai-chat', message, historyList)
-  } catch (e) {
-    console.warn('127.0.0.1 connection failed, falling back to localhost:', e)
-    return await fetchFromUrl('http://localhost:3001/api/ai-chat', message, historyList)
-  }
+  // Call the production Vercel API endpoint
+  return await fetchFromUrl('https://righttostaynj.org/api/ai-chat', message, historyList)
 }
 
 function addBubble(role, text, isLoading = false) {
@@ -246,7 +241,7 @@ async function sendChat() {
     updateChecklistFromText(reply)
   } catch (err) {
     loadingEl.remove()
-    addBubble('assistant', `⚠️ Error connecting to local server on port 3001: ${err.message || err}`)
+    addBubble('assistant', `⚠️ Error connecting to the server: ${err.message || err}`)
   } finally {
     loading = false
     document.getElementById('btn-send').disabled = false
@@ -291,7 +286,7 @@ async function explainNotice() {
       document.getElementById('notice-tab').scrollTop = resultEl.offsetTop - 20
     }, 100)
   } catch (err) {
-    resultEl.innerHTML = `<span style="color:#dc2626">⚠️ Could not analyze notice: ${err.message || err}. Make sure the local server is running on port 3001.</span>`
+    resultEl.innerHTML = `<span style="color:#dc2626">⚠️ Could not analyze notice: ${err.message || err}.</span>`
   } finally {
     loading = false
     document.getElementById('btn-explain').disabled = false
@@ -350,7 +345,7 @@ async function analyzeCurrentPage() {
     }, 100)
   } catch (err) {
     console.error(err)
-    resultEl.innerHTML = `<span style="color:#dc2626">⚠️ Could not analyze webpage. Make sure the local server is running on port 3001. (${err.message || ''})</span>`
+    resultEl.innerHTML = `<span style="color:#dc2626">⚠️ Could not analyze webpage. (${err.message || ''})</span>`
   } finally {
     loading = false
     btn.disabled = false

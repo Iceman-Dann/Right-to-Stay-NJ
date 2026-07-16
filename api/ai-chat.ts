@@ -49,7 +49,7 @@ EVICTION PROCESS TIMELINE:
 Respond in the same language the user writes in (English or Spanish). Be concise but thorough. Format responses with clear sections when helpful.`
 
 const ChatSchema = z.object({
-  message: z.string().min(1).max(2000),
+  message: z.string().min(1).max(10000),
   history: z.array(z.object({
     role: z.enum(['user', 'assistant']),
     content: z.string().max(10000)
@@ -93,6 +93,14 @@ function isRateLimited(ip: string): boolean {
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  // Allow requests from the main site and Chrome extensions
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+
+  // Handle pre-flight OPTIONS request
+  if (req.method === 'OPTIONS') return res.status(200).end()
+
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' })
 
   const groqKey = process.env.GROQ_API_KEY
