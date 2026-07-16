@@ -5,7 +5,7 @@ import {
   HomeIcon, DocumentIcon, MapIcon, ScalesIcon, ShieldIcon, PhoneIcon,
   DirectionsIcon, CopyIcon, WarningIcon, TrashIcon, PlusIcon, PrintIcon,
   BackIcon, CheckIcon, AlertIcon, SparkleIcon, LightbulbIcon, CourthouseIcon,
-  MediationIcon, MegaphoneIcon, RefreshIcon
+  MediationIcon, MegaphoneIcon, RefreshIcon, GithubIcon
 } from './components'
 import { legalAidOffices } from './data/legalAid'
 import { noticeTypes } from './data/notices'
@@ -2370,6 +2370,62 @@ export function CourtPrep() {
   )
 }
 
+function LocalScaleIcon({ className = "w-6 h-6" }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className={className}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v18M3 8.25h18M3 13.5h18M6 8.25l3 5.25m-3-5.25L3 13.5m15-5.25l3 5.25m-3-5.25l-3 5.25M6 13.5a3 3 0 100 6 3 3 0 000-6zm12 0a3 3 0 100 6 3 3 0 000-6z" />
+    </svg>
+  )
+}
+
+function LocalSparkIcon({ className = "w-6 h-6" }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className={className}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z" />
+    </svg>
+  )
+}
+
+function LocalWrenchIcon({ className = "w-6 h-6" }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className={className}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17L17.25 21A1.875 1.875 0 1020 18.25l-5.83-5.83M11.42 15.17a3 3 0 11-4.24-4.24m4.24 4.24a3 3 0 10-4.24-4.24M5.58 9.75L4 11.33A1.875 1.875 0 111.37 8.71l1.58-1.58M12.25 2.25l-1.58 1.58a1.875 1.875 0 102.62 2.62L14.88 4.88M9.75 5.58L8.17 4.1a1.875 1.875 0 112.62-2.63L12.25 3" />
+    </svg>
+  )
+}
+
+function LocalFistIcon({ className = "w-6 h-6" }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className={className}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.746 3.746 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+    </svg>
+  )
+}
+
+function LocalLockIcon({ className = "w-6 h-6" }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className={className}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+    </svg>
+  )
+}
+
+function LocalHeartIcon({ className = "w-6 h-6" }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className={className}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+    </svg>
+  )
+}
+
+function LocalCodeIcon({ className = "w-6 h-6" }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className={className}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
+    </svg>
+  )
+}
+
 export function About() {
   const { t, lang } = useTranslation()
 
@@ -2387,7 +2443,8 @@ export function About() {
       <div className="grid gap-10 md:grid-cols-2 mt-8">
         <div className="space-y-4">
           <h2 className="text-xl font-bold text-ink border-b border-rule pb-2 flex items-center gap-2">
-            ⚖️ {lang === 'es' ? 'El Gran Desequilibrio' : 'The Stark Imbalance'}
+            <LocalScaleIcon className="w-5.5 h-5.5 text-emerald-800" />
+            <span>{lang === 'es' ? 'El Gran Desequilibrio' : 'The Stark Imbalance'}</span>
           </h2>
           <p className="text-sm leading-relaxed text-margin/90">
             {lang === 'es'
@@ -2396,14 +2453,15 @@ export function About() {
           </p>
           <p className="text-sm leading-relaxed text-margin/90">
             {lang === 'es'
-              ? 'No es falta de derechos; Nueva Jersey tiene algunas de las protecciones al inquilino más fuertes de la nación. Es un problema de acceso. Sin un abogado, un simple tecnicismo legal o un acuerdo de mediación engañoso se convierte en un boleto de ida al desplazamiento forzado.'
-              : 'The issue isn\'t a lack of legal rights—New Jersey actually has some of the strongest tenant protections in the country. The issue is access. Without counsel, a minor procedural detail or a misleading settlement agreement becomes a fast track to displacement.'}
+              ? 'No es falta de derechos; Nueva Jersey tiene algunas de las protecciones al inquilino más fuertes de la nación. Es un problema de acceso. Sin un abogado, un simple tecnicismo legal o un acuerdo de mediación engañoso se convierte en un boleto de ida al desplazamiento para miles de familias.'
+              : 'The issue isn\'t a lack of legal rights—New Jersey actually has some of the strongest tenant protections in the country. The issue is access. Without counsel, a minor procedural detail or a misleading settlement agreement becomes a fast track to displacement for thousands of families.'}
           </p>
         </div>
 
         <div className="space-y-4">
           <h2 className="text-xl font-bold text-ink border-b border-rule pb-2 flex items-center gap-2">
-            ❄️ {lang === 'es' ? 'La Chispa que lo Inició Todo' : 'The Spark in the Cold'}
+            <LocalSparkIcon className="w-5.5 h-5.5 text-amber-700" />
+            <span>{lang === 'es' ? 'La Chispa que lo Inició Todo' : 'The Spark in the Cold'}</span>
           </h2>
           <p className="text-sm leading-relaxed text-margin/90 italic bg-rule/10 p-4 rounded-lg border-l-4 border-margin">
             {lang === 'es'
@@ -2418,10 +2476,55 @@ export function About() {
         </div>
       </div>
 
+      {/* Solo Developer Story Section */}
+      <div className="mt-16 border-t border-rule pt-12">
+        <div className="bg-emerald-50/15 border border-emerald-200 rounded-xl p-6 md:p-8 space-y-6">
+          <h2 className="text-2xl font-bold text-ink flex items-center gap-2.5">
+            <LocalCodeIcon className="w-6.5 h-6.5 text-emerald-800" />
+            <span>{lang === 'es' ? 'La Misión de un Desarrollador Solitario' : 'The Solo Developer\'s Mission'}</span>
+          </h2>
+          <div className="grid gap-8 md:grid-cols-[1fr_200px]">
+            <div className="space-y-4 text-sm leading-relaxed text-margin/95 font-medium">
+              <p>
+                {lang === 'es'
+                  ? 'Este proyecto no es el producto de una gran empresa o corporación legal. Fue conceptualizado, diseñado y construido por completo por un único desarrollador apasionado por usar la tecnología para el bien público y la justicia de inquilinos en su comunidad de Nueva Jersey.'
+                  : 'This platform is not the product of a large corporation, law firm, or state agency. It was conceptualized, designed, and coded entirely by a single civic-minded software developer driven by a desire to level the playing field for working-class tenants in New Jersey.'}
+              </p>
+              <p>
+                {lang === 'es'
+                  ? 'Al ver cómo miles de personas de bajos ingresos perdían sus hogares simplemente por no comprender la jerga legal o los tecnicismos judiciales, el desarrollador dedicó largas noches a programar estas herramientas interactivas: desde el auditor de aumentos y el simulador de mediación, hasta las bitácoras imprimibles y la extensión de Chrome.'
+                  : 'Struck by the injustice of low-income families losing their homes due to complex legal jargon, the developer worked late nights implementing these interactive aids: coding localized rent calculators, building the mediation simulator, crafting printable logs, and packaging the Chrome extension.'}
+              </p>
+              <p>
+                {lang === 'es'
+                  ? 'El software es 100% de código abierto. Todo el código fuente está disponible públicamente en GitHub para auditoría, transparencia y para que otros desarrolladores colaboren en la expansión de los derechos de vivienda.'
+                  : 'The software is 100% open-source and non-commercial. The entire codebase is hosted publicly on GitHub for audit, transparency, and collaboration, allowing other developers to contribute and expand housing protections.'}
+              </p>
+            </div>
+            
+            <div className="flex flex-col justify-center items-center p-5 bg-paper border border-rule rounded-lg text-center space-y-4">
+              <GithubIcon className="w-12 h-12 text-ink" />
+              <div className="text-2xs font-bold text-ink uppercase tracking-wider">
+                {lang === 'es' ? 'Proyecto Abierto' : 'Open Source'}
+              </div>
+              <a 
+                href="https://github.com/Iceman-Dann/Right-to-Stay-NJ" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="primary-cta mt-0 py-2 px-3 text-2xs font-bold rounded cursor-pointer active:scale-95 transition"
+              >
+                {lang === 'es' ? 'Ver en GitHub' : 'View Codebase'}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Interactive Story Timeline */}
       <div className="bg-paper border border-rule rounded-xl p-6 md:p-8 mt-12 shadow-sm">
         <h2 className="text-xl font-bold text-ink mb-6 flex items-center gap-2">
-          🛠️ {lang === 'es' ? 'Cómo se Construyó el Proyecto' : 'How the Platform Was Forged'}
+          <LocalWrenchIcon className="w-5.5 h-5.5 text-emerald-800" />
+          <span>{lang === 'es' ? 'Cómo se Construyó el Proyecto' : 'How the Platform Was Forged'}</span>
         </h2>
         <div className="space-y-8 relative before:absolute before:inset-y-0 before:left-3.5 before:w-0.5 before:bg-rule">
           
@@ -2466,28 +2569,37 @@ export function About() {
 
       {/* Project Values Section */}
       <div className="grid gap-6 sm:grid-cols-3 mt-12">
-        <div className="border border-rule rounded-lg p-5 bg-paper/50">
-          <h3 className="text-sm font-bold uppercase tracking-wider text-ink mb-2">✊ {lang === 'es' ? 'Independiente' : '100% Independent'}</h3>
+        <div className="border border-rule rounded-lg p-5 bg-paper/50 space-y-2">
+          <h3 className="text-sm font-bold uppercase tracking-wider text-ink flex items-center gap-1.5">
+            <LocalFistIcon className="w-4 h-4 text-emerald-800 shrink-0" />
+            <span>{lang === 'es' ? 'Independiente' : '100% Independent'}</span>
+          </h3>
           <p className="text-xs text-margin leading-relaxed">
             {lang === 'es'
               ? 'No estamos afiliados con el sistema judicial ni con agencias gubernamentales. Somos un recurso comunitario directo apoyado en leyes vigentes.'
               : 'We are not affiliated with the court system or state agencies. We are a direct, community-focused resource backed strictly by public laws.'}
           </p>
         </div>
-        <div className="border border-rule rounded-lg p-5 bg-paper/50">
-          <h3 className="text-sm font-bold uppercase tracking-wider text-ink mb-2">🔒 {lang === 'es' ? 'Privado por Diseño' : 'Privacy by Design'}</h3>
+        <div className="border border-rule rounded-lg p-5 bg-paper/50 space-y-2">
+          <h3 className="text-sm font-bold uppercase tracking-wider text-ink flex items-center gap-1.5">
+            <LocalLockIcon className="w-4 h-4 text-emerald-800 shrink-0" />
+            <span>{lang === 'es' ? 'Privado por Diseño' : 'Privacy by Design'}</span>
+          </h3>
           <p className="text-xs text-margin leading-relaxed">
             {lang === 'es'
               ? 'Tus datos de alquiler, cálculos financieros e historiales de chat se procesan de forma privada. Nunca rastreamos información personal identificable.'
               : 'Your rent inputs, ledger numbers, and chatbot transcripts are fully private. We never track or store personally identifiable details.'}
           </p>
         </div>
-        <div className="border border-rule rounded-lg p-5 bg-paper/50">
-          <h3 className="text-sm font-bold uppercase tracking-wider text-ink mb-2">🤝 {lang === 'es' ? 'Acceso Gratuito' : 'Free Access'}</h3>
+        <div className="border border-rule rounded-lg p-5 bg-paper/50 space-y-2">
+          <h3 className="text-sm font-bold uppercase tracking-wider text-ink flex items-center gap-1.5">
+            <LocalHeartIcon className="w-4 h-4 text-emerald-800 shrink-0" />
+            <span>{lang === 'es' ? 'Acceso Gratuito' : 'Free Access'}</span>
+          </h3>
           <p className="text-xs text-margin leading-relaxed">
             {lang === 'es'
               ? 'El acceso a la justicia no debería depender de tu billetera. Todas las herramientas y cartas de esta plataforma serán gratuitas para siempre.'
-              : 'Access to justice shouldn\'t require a credit card. Every tool and letter template on this portal is, and will remain, free forever.'}
+              : "Access to housing justice shouldn't require a credit card. Every tool and letter template on this portal is, and will remain, free forever."}
           </p>
         </div>
       </div>
