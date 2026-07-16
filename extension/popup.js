@@ -141,10 +141,10 @@ async function init() {
     
     data.checklistItems.forEach(item => {
       const itemDiv = document.createElement('div')
-      itemDiv.style.cssText = 'display: flex; gap: 8px; align-items: flex-start; background: white; padding: 10px; border: 1.5px solid #cbd5e1; border-radius: 8px; font-size: 12px; line-height: 1.4;'
+      itemDiv.style.cssText = 'display: flex; gap: 8px; align-items: flex-start; background: white; padding: 10px; border: 1.5px solid var(--color-rule); border-radius: 8px; font-size: 12px; line-height: 1.4;'
       itemDiv.innerHTML = `
-        <input type="checkbox" id="${item.id}" ${item.checked ? 'checked' : ''} style="margin-top: 2px; cursor: pointer;" />
-        <label for="${item.id}" style="flex:1; cursor: pointer; color: #1c2b3a;">${item.text}</label>
+        <input type="checkbox" id="${item.id}" ${item.checked ? 'checked' : ''} style="margin-top: 2.5px; cursor: pointer; accent-color: var(--color-margin);" />
+        <label for="${item.id}" style="flex:1; cursor: pointer; color: var(--color-ink);">${item.text}</label>
       `
       container.appendChild(itemDiv)
     })
@@ -466,11 +466,11 @@ function updateChecklistFromText(text) {
       const chkId = `chk-dynamic-${index}`
       
       const itemDiv = document.createElement('div')
-      itemDiv.style.cssText = 'display: flex; gap: 8px; align-items: flex-start; background: white; padding: 10px; border: 1.5px solid #cbd5e1; border-radius: 8px; font-size: 12px; line-height: 1.4; animation: fadeIn 0.3s;'
+      itemDiv.style.cssText = 'display: flex; gap: 8px; align-items: flex-start; background: white; padding: 10px; border: 1.5px solid var(--color-rule); border-radius: 8px; font-size: 12px; line-height: 1.4; animation: fadeIn 0.3s;'
       
       itemDiv.innerHTML = `
-        <input type="checkbox" id="${chkId}" style="margin-top: 2px; cursor: pointer;" />
-        <label for="${chkId}" style="flex:1; cursor: pointer; color: #1c2b3a;">${escapeHtml(cleanText)}</label>
+        <input type="checkbox" id="${chkId}" style="margin-top: 2.5px; cursor: pointer; accent-color: var(--color-margin);" />
+        <label for="${chkId}" style="flex:1; cursor: pointer; color: var(--color-ink);">${escapeHtml(cleanText)}</label>
       `
       container.appendChild(itemDiv)
     }
@@ -482,7 +482,7 @@ function updateChecklistFromText(text) {
   // If new items were loaded, notify user by switching tab button styling briefly
   if (taskCount > 0) {
     const tabBtn = document.getElementById('tab-checklist-btn')
-    tabBtn.style.color = '#3d6b52'
+    tabBtn.style.color = 'var(--color-margin)'
     tabBtn.style.fontWeight = '800'
     setTimeout(() => {
       tabBtn.style.color = ''
@@ -603,15 +603,15 @@ function formatMessageToHtml(content) {
     
     // Headers
     if (trimmed.startsWith('### ')) {
-      html += `<h4 style="font-weight:750; font-size:13.5px; color:#1c2b3a; margin-top:12px; margin-bottom:4px; text-transform:uppercase; letter-spacing:0.02em;">${formatInlineHtml(trimmed.slice(4))}</h4>`
+      html += `<h4 style="font-weight:750; font-size:13.5px; color:var(--color-ink); margin-top:12px; margin-bottom:4px; text-transform:uppercase; letter-spacing:0.02em;">${formatInlineHtml(trimmed.slice(4))}</h4>`
       return
     }
     if (trimmed.startsWith('## ')) {
-      html += `<h3 style="font-weight:750; font-size:14.5px; color:#1c2b3a; margin-top:14px; margin-bottom:6px;">${formatInlineHtml(trimmed.slice(3))}</h3>`
+      html += `<h3 style="font-weight:750; font-size:14.5px; color:var(--color-ink); margin-top:14px; margin-bottom:6px;">${formatInlineHtml(trimmed.slice(3))}</h3>`
       return
     }
     if (trimmed.startsWith('# ')) {
-      html += `<h2 style="font-weight:800; font-size:16px; color:#1c2b3a; margin-top:16px; margin-bottom:8px;">${formatInlineHtml(trimmed.slice(2))}</h2>`
+      html += `<h2 style="font-weight:800; font-size:16px; color:var(--color-ink); margin-top:16px; margin-bottom:8px;">${formatInlineHtml(trimmed.slice(2))}</h2>`
       return
     }
     
@@ -625,7 +625,7 @@ function formatMessageToHtml(content) {
     const numMatch = trimmed.match(/^(\d+)\.\s(.*)/)
     if (numMatch) {
       html += `<div style="display:flex; gap:6px; font-size:12.5px; margin-bottom:4px; margin-left:6px; line-height:1.5;">
-        <span style="font-weight:700; color:#3d6b52;">${numMatch[1]}.</span>
+        <span style="font-weight:700; color:var(--color-margin);">${numMatch[1]}.</span>
         <div style="flex:1;">${formatInlineHtml(numMatch[2])}</div>
       </div>`
       return
@@ -647,10 +647,10 @@ function formatInlineHtml(content) {
   parts.forEach(part => {
     if (part.startsWith('\\[') && part.endsWith('\\]')) {
       const formula = part.slice(2, -2).trim()
-      result += `<div style="margin:10px 0; padding:8px; background:rgba(28,43,58,0.05); border-left:3px solid #3d6b52; border-radius:0 6px 6px 0; font-family:monospace; font-size:11.5px; text-align:center; overflow-x:auto;">${escapeHtml(formula)}</div>`
+      result += `<div style="margin:10px 0; padding:8px; background:rgba(23,36,58,0.04); border-left:3px solid var(--color-margin); border-radius:0 6px 6px 0; font-family:var(--font-mono); font-size:11.5px; text-align:center; overflow-x:auto;">${escapeHtml(formula)}</div>`
     } else if (part.startsWith('\\(') && part.endsWith('\\)')) {
       const formula = part.slice(2, -2).trim()
-      result += `<span style="display:inline-block; padding:2px 5px; margin:0 2px; background:rgba(28,43,58,0.05); border-radius:4px; font-family:monospace; font-size:11.5px; color:#3d6b52; font-weight:700;">${escapeHtml(formula)}</span>`
+      result += `<span style="display:inline-block; padding:2px 5px; margin:0 2px; background:rgba(23,36,58,0.04); border-radius:4px; font-family:var(--font-mono); font-size:11.5px; color:var(--color-margin); font-weight:700;">${escapeHtml(formula)}</span>`
     } else if (part.startsWith('**') && part.endsWith('**')) {
       result += `<strong style="font-weight:700;">${part.slice(2, -2)}</strong>`
     } else if (part.startsWith('*') && part.endsWith('*')) {
