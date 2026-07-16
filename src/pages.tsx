@@ -1089,10 +1089,6 @@ export function Home() {
         <div style={{position:'absolute',top:'-10rem',right:'-6rem',width:'36rem',height:'36rem',borderRadius:'50%',background:'radial-gradient(circle,rgba(45,106,79,0.07) 0%,transparent 70%)',pointerEvents:'none'}} />
         <div className="shell py-16 md:py-28 text-center max-w-4xl mx-auto space-y-8 relative">
           <div className="space-y-5">
-            <span className="badge-emerald inline-flex">
-              <ShieldIcon className="w-3 h-3" />
-              {lang === 'es' ? 'Portal de Derechos de Inquilinos NJ' : 'NJ Tenant Rights Portal'}
-            </span>
             <h1>
               {lang === 'es' ? 'Defiende Tu Hogar en Nueva Jersey' : 'Defend Your Home in New Jersey'}
             </h1>
