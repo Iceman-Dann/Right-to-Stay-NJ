@@ -306,11 +306,8 @@ export function Layout({ children }: { children: ReactNode }) {
       <div className="emergency-lockout-banner" style={{background:'linear-gradient(90deg,#7f1d1d 0%,#991b1b 50%,#7f1d1d 100%)',color:'#FFF7F7',padding:'0.6rem 0',fontSize:'0.8rem',fontWeight:700,letterSpacing:'0.01em'}}>
         <div className="shell flex items-center justify-between gap-3">
           <span className="flex items-center gap-2 leading-normal">
-            <span style={{display:'inline-flex',alignItems:'center',gap:'0.3rem',background:'rgba(255,255,255,0.15)',border:'1px solid rgba(255,255,255,0.25)',borderRadius:'999px',padding:'0.15rem 0.5rem',fontSize:'0.65rem',fontWeight:800,letterSpacing:'0.08em',textTransform:'uppercase'}}>
-              <WarningIcon className="w-3 h-3" />
-              URGENT
-            </span>
-            <span className="text-red-100">{t('emergency_banner_text')}</span>
+            <WarningIcon className="w-4 h-4 shrink-0" />
+            <span>{t('emergency_banner_text')}</span>
           </span>
           <Link to="/know-your-rights" className="whitespace-nowrap font-bold ml-2 shrink-0 text-white hover:text-red-100 flex items-center gap-1" style={{borderBottom:'1px solid rgba(255,255,255,0.4)',paddingBottom:'1px'}}>
             {lang === 'es' ? 'Ver mis derechos' : 'See My Rights'} →
@@ -320,14 +317,9 @@ export function Layout({ children }: { children: ReactNode }) {
 
       <header className="border-b border-rule" style={{background:'rgba(247,245,239,0.95)',backdropFilter:'blur(12px)',WebkitBackdropFilter:'blur(12px)',position:'sticky',top:0,zIndex:30}}>
         <div className="shell flex items-center justify-between gap-4 py-4">
-          <Link to="/" className="flex items-center gap-2.5 active:scale-97 transition">
-            <div style={{width:36,height:36,borderRadius:'0.5rem',background:'linear-gradient(135deg,#2D6A4F,#17243A)',display:'flex',alignItems:'center',justifyContent:'center',boxShadow:'0 2px 8px rgba(45,106,79,0.25)'}}>
-              <img src="/icon.svg" className="h-5 w-5 object-contain" style={{filter:'brightness(0) invert(1)'}} alt="" />
-            </div>
-            <div>
-              <span className="font-bold text-ink text-base leading-none block" style={{fontFamily:'var(--font-display)'}}>{t('home_title')}</span>
-              <span className="text-margin text-[10px] font-semibold uppercase tracking-widest">NJ Tenant Defense</span>
-            </div>
+          <Link to="/" className="flex items-center gap-2 text-lg font-semibold tracking-tight active:scale-97 transition">
+            <img src="/icon.svg" className="h-7 w-7 object-contain" alt="" />
+            <span>{t('home_title')}</span>
           </Link>
           
           {/* Desktop Navigation Top-Right preferences */}

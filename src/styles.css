@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:ital,wght@0,700;0,800;1,700&family=JetBrains+Mono:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
 @import 'tailwindcss';
 
 /* ─── Design Tokens ────────────────────────────────────────────────────────── */
@@ -10,7 +10,6 @@
   --color-rule:   #DDD8C4;
   --font-body:    'Plus Jakarta Sans', system-ui, sans-serif;
   --font-notice:  'JetBrains Mono', 'Courier Prime', monospace;
-  --font-display: 'Fraunces', Georgia, serif;
 }
 
 /* ─── Base Reset ───────────────────────────────────────────────────────────── */
@@ -36,7 +35,6 @@
   h1, h2, h3, p { margin: 0; }
 
   h1 {
-    font-family: var(--font-display);
     font-size: clamp(2.4rem, 7vw, 5rem);
     line-height: 1.00;
     letter-spacing: -0.04em;
@@ -433,7 +431,7 @@ header {
 
 /* ─── Metrics ──────────────────────────────────────────────────────────────── */
 .metric { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 2.5rem; border-bottom: 1px solid var(--color-rule); padding-bottom: 2rem; }
-.metric strong { font-size: clamp(3rem, 8vw, 5.5rem); line-height: 1; letter-spacing: -0.06em; font-family: var(--font-display); }
+.metric strong { font-size: clamp(3rem, 8vw, 5.5rem); line-height: 1; letter-spacing: -0.06em; font-weight: 800; }
 .dashboard-grid { margin-top: 3rem; }
 .dashboard-grid article { border-top: 1px solid var(--color-rule); padding-top: 1.5rem; }
 
@@ -453,7 +451,7 @@ header {
 .draft-packet dt { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-margin); }
 .draft-packet dd { margin: 0; white-space: pre-wrap; }
 .draft-packet li { margin-top: 0.5rem; }
-.watermark { position: absolute; inset: 30% -10% auto; transform: rotate(-25deg); color: var(--color-rule); font-size: clamp(2.5rem, 8vw, 6rem); font-weight: 700; line-height: 1; text-align: center; pointer-events: none; font-family: var(--font-display); }
+.watermark { position: absolute; inset: 30% -10% auto; transform: rotate(-25deg); color: var(--color-rule); font-size: clamp(2.5rem, 8vw, 6rem); font-weight: 700; line-height: 1; text-align: center; pointer-events: none; }
 .draft-actions { position: relative; z-index: 1; display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; margin-top: 2rem; }
 .draft-actions .primary-cta { margin-top: 0; }
 

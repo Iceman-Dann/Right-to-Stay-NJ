@@ -1093,7 +1093,7 @@ export function Home() {
               <ShieldIcon className="w-3 h-3" />
               {lang === 'es' ? 'Portal de Derechos de Inquilinos NJ' : 'NJ Tenant Rights Portal'}
             </span>
-            <h1 className="gradient-text">
+            <h1>
               {lang === 'es' ? 'Defiende Tu Hogar en Nueva Jersey' : 'Defend Your Home in New Jersey'}
             </h1>
             <p className="text-lg text-ink/70 max-w-2xl mx-auto leading-relaxed font-medium">
