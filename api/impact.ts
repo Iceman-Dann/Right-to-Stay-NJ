@@ -25,6 +25,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(200).json({ range: days, total: totalRows[0]?.value ?? 0, events: safe(eventRows), counties: safe(countyRows), categories: safe(categoryRows), suppressionThreshold: THRESHOLD, generatedAt: new Date().toISOString() })
   } catch (error: any) {
     console.error('Impact API error:', error)
-    return res.status(500).json({ error: error.message || String(error) })
+    return res.status(500).json({
+      error: error.message || String(error),
+      cause: error.cause?.message || error.cause || null,
+      detail: error.detail || null,
+      code: error.code || null
+    })
   }
 }

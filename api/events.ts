@@ -23,6 +23,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(204).end()
   } catch (error: any) {
     console.error('Events API error:', error)
-    return res.status(500).json({ error: error.message || String(error) })
+    return res.status(500).json({
+      error: error.message || String(error),
+      cause: error.cause?.message || error.cause || null,
+      detail: error.detail || null,
+      code: error.code || null
+    })
   }
 }
