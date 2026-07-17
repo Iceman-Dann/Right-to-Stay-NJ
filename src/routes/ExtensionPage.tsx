@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { useTranslation } from '../components'
+import { PageIntro, useTranslation } from '../components'
 
 // -----------------------------------
 // Inline 1:1 Extension Popup Mockup
@@ -85,129 +85,163 @@ function ExtensionMockup() {
   }
 
   return (
-    <div style={{
-      fontFamily: "'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-      width: '440px',
-      minHeight: '580px',
-      maxHeight: '640px',
-      background: '#F7F5EF',
-      color: '#17243A',
-      display: 'flex',
-      flexDirection: 'column',
-      borderRadius: '12px',
-      overflow: 'hidden',
-      boxShadow: '0 32px 80px rgba(23,36,58,0.28), 0 8px 24px rgba(23,36,58,0.12)',
-    }}>
-
-      {/* Header */}
-      <div style={{ background: '#fff', padding: '14px 16px', display: 'flex', alignItems: 'center', gap: '12px', borderBottom: '1.5px solid #DDD8C4', position: 'sticky', top: 0, zIndex: 50 }}>
-        <div style={{ width: 32, height: 32, background: '#17243A', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+    <div 
+      className="border border-rule rounded-xl shadow-lg flex flex-col text-left overflow-hidden mx-auto md:mx-0"
+      style={{
+        width: '440px',
+        minHeight: '580px',
+        maxHeight: '640px',
+        background: 'var(--color-paper)',
+        color: 'var(--color-ink)',
+      }}
+    >
+      {/* Mockup Header */}
+      <div className="bg-white px-4 py-3 flex items-center gap-3 border-b border-rule sticky top-0 z-50">
+        <div className="w-8 h-8 bg-ink rounded-lg flex items-center justify-center shrink-0">
           <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" /></svg>
         </div>
         <div>
-          <div style={{ fontSize: 15, fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.1 }}>Right to Stay NJ</div>
-          <div style={{ fontSize: 10, color: '#2D6A4F', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginTop: 1 }}>AI Tenant Assistant</div>
+          <h1 className="text-sm font-extrabold tracking-tight m-0 p-0 text-ink" style={{ fontSize: '15px' }}>Right to Stay NJ</h1>
+          <p className="text-4xs text-margin font-bold uppercase tracking-wider mt-0.5" style={{ fontSize: '10px' }}>AI Tenant Assistant</p>
         </div>
-        <div style={{ marginLeft: 'auto', display: 'flex', border: '1.5px solid #DDD8C4', borderRadius: 6, overflow: 'hidden', background: 'white' }}>
+        <div className="ml-auto flex border border-rule rounded-md overflow-hidden bg-white">
           {(['en', 'es'] as const).map(l => (
-            <button key={l} onClick={() => toggleLang(l)} style={{ padding: '4px 8px', fontSize: 10, fontWeight: 700, border: 'none', cursor: 'pointer', background: lang === l ? '#17243A' : 'transparent', color: lang === l ? 'white' : '#64748b', transition: 'all 0.15s' }}>{l.toUpperCase()}</button>
+            <button key={l} onClick={() => toggleLang(l)} className={`px-2 py-1 text-4xs font-bold border-none cursor-pointer transition ${lang === l ? 'bg-ink text-paper' : 'bg-transparent text-slate-500 hover:bg-rule/20'}`} style={{ fontSize: '10px' }}>{l.toUpperCase()}</button>
           ))}
         </div>
       </div>
 
-      {/* Emergency Banner */}
-      <div style={{ background: 'linear-gradient(90deg, #7f1d1d 0%, #991b1b 50%, #7f1d1d 100%)', color: '#fff7f7', padding: '8px 14px', fontSize: '10.5px', fontWeight: 700, lineHeight: 1.45, display: 'flex', alignItems: 'flex-start', gap: 6 }}>
-        <svg style={{ width: 14, height: 14, marginTop: 1.5, flexShrink: 0 }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
-        <span style={{ flex: 1, marginLeft: 4 }}><strong>{lang === 'es' ? '¿Están cambiando sus cerraduras?' : 'Locked out?'}</strong> {lang === 'es' ? ' Un propietario que cambia cerraduras sin una orden judicial viola N.J.S.A. 2A:39-1. Llame al 911.' : ' A landlord changing locks without a court officer violates N.J.S.A. 2A:39-1. Call 911.'}</span>
+      {/* Emergency Lockout Banner */}
+      <div className="bg-red-950 text-red-100 px-4 py-2 text-3xs font-bold flex items-start gap-1.5 border-b border-red-900" style={{ fontSize: '10.5px' }}>
+        <svg className="w-3.5 h-3.5 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
+        <span className="leading-relaxed"><strong>{lang === 'es' ? '¿Están cambiando sus cerraduras?' : 'Locked out?'}</strong> {lang === 'es' ? ' Un propietario que cambia cerraduras sin una orden de desalojo formal viola N.J.S.A. 2A:39-1. Llame al 911.' : ' A landlord changing locks without a court officer violates N.J.S.A. 2A:39-1. Call 911.'}</span>
       </div>
 
-      {/* Disclaimer */}
-      <div style={{ background: '#FFFBEB', borderBottom: '1px solid #FEF3C7', padding: '8px 16px', fontSize: '10.5px', color: '#92400E', lineHeight: 1.45 }}>
+      {/* Disclaimer Banner */}
+      <div className="bg-amber-50 border-b border-amber-100 px-4 py-2 text-3xs text-amber-800" style={{ fontSize: '10.5px' }}>
         <strong>{lang === 'es' ? 'Información general, no asesoría legal.' : 'General info, not legal advice.'}</strong>
-        {' '}{lang === 'es' ? 'Llame a LSNJLAW gratis:' : 'Call LSNJLAW free:'} <strong><a href="tel:18885765529" style={{ color: '#92400e' }}>1-888-576-5529</a></strong>
+        {' '}{lang === 'es' ? 'Llame a LSNJLAW gratis:' : 'Call LSNJLAW free:'} <strong><a href="tel:18885765529" className="text-amber-900 font-semibold underline">1-888-576-5529</a></strong>
       </div>
 
-      {/* Tabs */}
-      <div style={{ display: 'flex', gap: 6, padding: '8px 12px', borderBottom: '1px solid #DDD8C4', background: '#fff' }}>
+      {/* Tabs Row */}
+      <div className="flex gap-1.5 px-3 py-2 border-b border-rule bg-white">
         {([
-          { id: 'chat' as const, icon: <svg style={{ width: 13, height: 13 }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379L12 21.75V16.5m-6-12h10.5A2.25 2.25 0 0118.75 6.75V16.5a2.25 2.25 0 01-2.25 2.25H12h-3L3.75 21.75V16.5a2.25 2.25 0 01-2.25-2.25V6.75A2.25 2.25 0 013.75 4.5z" /></svg>, label: lang === 'es' ? 'Preguntar' : 'Ask a Question' },
-          { id: 'notice' as const, icon: <svg style={{ width: 13, height: 13 }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>, label: lang === 'es' ? 'Explicar Aviso' : 'Explain Notice' },
-          { id: 'checklist' as const, icon: <svg style={{ width: 13, height: 13 }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.03 0 1.9.693 2.166 1.638m-7.377 0A48.536 48.536 0 0112 3m0 0c2.917 0 5.747.294 8.5.862" /></svg>, label: lang === 'es' ? 'Mi Lista' : 'My Checklist' },
+          { id: 'chat' as const, icon: <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379L12 21.75V16.5m-6-12h10.5A2.25 2.25 0 0118.75 6.75V16.5a2.25 2.25 0 01-2.25 2.25H12h-3L3.75 21.75V16.5a2.25 2.25 0 01-2.25-2.25V6.75A2.25 2.25 0 013.75 4.5z" /></svg>, label: lang === 'es' ? 'Preguntar' : 'Ask a Question' },
+          { id: 'notice' as const, icon: <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>, label: lang === 'es' ? 'Explicar Aviso' : 'Explain Notice' },
+          { id: 'checklist' as const, icon: <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.03 0 1.9.693 2.166 1.638m-7.377 0A48.536 48.536 0 0112 3m0 0c2.917 0 5.747.294 8.5.862" /></svg>, label: lang === 'es' ? 'Mi Lista' : 'My Checklist' },
         ]).map(t => (
-          <button key={t.id} onClick={() => setActiveTab(t.id)} style={{ flex: 1, padding: '8px 6px', fontSize: '11.5px', fontWeight: 700, textAlign: 'center', cursor: 'pointer', border: `1.5px solid ${activeTab === t.id ? 'rgba(45,106,79,0.15)' : 'transparent'}`, background: activeTab === t.id ? 'rgba(45,106,79,0.09)' : 'transparent', color: activeTab === t.id ? '#2D6A4F' : '#17243A', opacity: activeTab === t.id ? 1 : 0.55, borderRadius: 8, transition: 'all 0.2s', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 5 }}>
+          <button key={t.id} onClick={() => setActiveTab(t.id)} className={`flex-1 py-2 px-1 text-3xs font-bold text-center cursor-pointer border rounded-lg transition-all flex items-center justify-center gap-1 ${activeTab === t.id ? 'bg-margin/10 border-margin/20 text-margin opacity-100' : 'bg-transparent border-transparent text-ink opacity-60 hover:opacity-100 hover:bg-ink/5'}`} style={{ fontSize: '11.5px' }}>
             {t.icon}<span>{t.label}</span>
           </button>
         ))}
       </div>
 
-      {/* Chat Tab */}
+      {/* Chat Tab Body */}
       {activeTab === 'chat' && (
-        <div style={{ display: 'flex', flexDirection: 'column', flex: 1, minHeight: 0 }}>
-          <div style={{ flex: 1, overflowY: 'auto', padding: 16, display: 'flex', flexDirection: 'column', gap: 10, minHeight: 240, maxHeight: 340, background: '#F7F5EF' }}>
+        <div className="flex flex-col flex-1 min-h-0">
+          <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-3" style={{ minHeight: '240px', maxHeight: '340px', background: 'var(--color-paper)' }}>
             {messages.map((m, i) => (
-              <div key={i} style={{ maxWidth: '88%', padding: '10px 14px', borderRadius: 12, fontSize: '12.5px', lineHeight: 1.55, alignSelf: m.role === 'user' ? 'flex-end' : 'flex-start', background: m.role === 'user' ? 'linear-gradient(135deg,#17243A 0%,#0F1A28 100%)' : 'white', color: m.role === 'user' ? 'white' : '#17243A', border: m.role === 'assistant' ? '1.5px solid #DDD8C4' : 'none', borderBottomRightRadius: m.role === 'user' ? 3 : 12, borderBottomLeftRadius: m.role === 'assistant' ? 3 : 12 }}>
+              <div 
+                key={i} 
+                className={`max-w-[88%] px-3.5 py-2.5 rounded-xl text-xs md:text-sm leading-relaxed ${m.role === 'user' ? 'bg-ink text-white self-end rounded-br-sm' : 'bg-white text-ink border border-rule self-start rounded-bl-sm shadow-sm'}`}
+                style={{ fontSize: '12.5px' }}
+              >
                 {m.content}
               </div>
             ))}
             {sending && (
-              <div style={{ maxWidth: '88%', padding: '10px 14px', borderRadius: 12, background: 'white', border: '1.5px solid #DDD8C4', alignSelf: 'flex-start', borderBottomLeftRadius: 3 }}>
-                <div style={{ display: 'flex', gap: 4, alignItems: 'center', height: 14 }}>
+              <div className="max-w-[88%] px-3.5 py-2.5 rounded-xl bg-white border border-rule self-start rounded-bl-sm shadow-sm">
+                <div className="flex gap-1 items-center h-3.5">
                   {[0, 0.15, 0.3].map((delay, i) => (
-                    <div key={i} style={{ width: 6, height: 6, borderRadius: '50%', background: '#DDD8C4', animation: `bounce 1.2s ease-in-out ${delay}s infinite` }} />
+                    <div key={i} className="w-1.5 h-1.5 rounded-full bg-rule animate-bounce" style={{ animationDelay: `${delay}s`, width: 6, height: 6 }} />
                   ))}
                 </div>
               </div>
             )}
             <div ref={messagesEndRef} />
           </div>
-          <div style={{ display: 'flex', gap: 8, padding: '12px 16px 16px', borderTop: '1px solid #DDD8C4', background: 'white' }}>
-            <textarea value={input} onChange={e => setInput(e.target.value)} onKeyDown={handleKeyDown} rows={1} placeholder={lang === 'es' ? 'Pregunte sobre sus derechos...' : 'Ask about your rights...'} style={{ flex: 1, padding: '10px 12px', border: '1.5px solid #DDD8C4', borderRadius: 8, fontSize: '12.5px', fontFamily: 'inherit', outline: 'none', resize: 'none', height: 38, color: '#17243A' }} />
-            <button onClick={handleSend} disabled={sending || !input.trim()} style={{ padding: '8px 16px', background: '#17243A', color: 'white', border: 'none', borderRadius: 8, fontSize: '12.5px', fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap', opacity: (sending || !input.trim()) ? 0.5 : 1 }}>{lang === 'es' ? 'Enviar' : 'Send'}</button>
+          {/* Chat input row */}
+          <div className="flex gap-2 p-3 border-t border-rule bg-white">
+            <textarea 
+              value={input} 
+              onChange={e => setInput(e.target.value)} 
+              onKeyDown={handleKeyDown} 
+              rows={1} 
+              placeholder={lang === 'es' ? 'Pregunte sobre sus derechos...' : 'Ask about your rights...'} 
+              className="flex-1 px-3 py-2 border border-rule rounded-lg text-xs md:text-sm outline-none resize-none bg-white text-ink focus:border-margin focus:ring-2 focus:ring-margin/10 transition" 
+              style={{ height: '38px', fontSize: '12.5px', fontFamily: 'inherit' }} 
+            />
+            <button 
+              onClick={handleSend} 
+              disabled={sending || !input.trim()} 
+              className="px-4 py-2 bg-ink text-white border-none rounded-lg text-xs font-bold cursor-pointer transition hover:bg-margin active:scale-97 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+              style={{ fontSize: '12.5px' }}
+            >
+              {lang === 'es' ? 'Enviar' : 'Send'}
+            </button>
           </div>
         </div>
       )}
 
-      {/* Notice Tab */}
+      {/* Notice Tab Body */}
       {activeTab === 'notice' && (
-        <div style={{ padding: 16, display: 'flex', flexDirection: 'column', gap: 12, overflowY: 'auto', maxHeight: 450 }}>
-          <textarea value={noticeText} onChange={e => setNoticeText(e.target.value)} placeholder={lang === 'es' ? 'Pegue el texto de su aviso de desalojo aquí...' : 'Paste the text from your eviction notice here...'} style={{ width: '100%', height: 110, padding: 12, border: '1.5px solid #DDD8C4', borderRadius: 8, fontSize: 12, lineHeight: 1.55, resize: 'none', fontFamily: 'inherit', outline: 'none', background: 'white', color: '#17243A' }} />
-          <button onClick={handleExplainNotice} disabled={analyzingNotice || !noticeText.trim()} style={{ padding: 11, background: analyzingNotice || !noticeText.trim() ? '#DDD8C4' : 'linear-gradient(135deg, #B5531A 0%, #8B3A0F 100%)', color: 'white', border: 'none', borderRadius: 8, fontSize: '12.5px', fontWeight: 700, cursor: (analyzingNotice || !noticeText.trim()) ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
-            <svg style={{ width: 14, height: 14 }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.602 10.602z" /></svg>
+        <div className="p-4 flex flex-col gap-3 overflow-y-auto" style={{ maxHeight: '450px' }}>
+          <textarea 
+            value={noticeText} 
+            onChange={e => setNoticeText(e.target.value)} 
+            placeholder={lang === 'es' ? 'Pegue el texto de su aviso de desalojo aquí...' : 'Paste the text from your eviction notice here...'} 
+            className="w-full h-28 p-3 border border-rule rounded-lg text-xs leading-relaxed resize-none outline-none bg-white text-ink focus:border-margin focus:ring-2 focus:ring-margin/10 transition"
+            style={{ fontFamily: 'inherit' }}
+          />
+          <button 
+            onClick={handleExplainNotice} 
+            disabled={analyzingNotice || !noticeText.trim()} 
+            className="py-2.5 px-4 bg-stamp text-white border-none rounded-lg text-xs font-bold cursor-pointer flex items-center justify-center gap-1.5 transition active:scale-97 hover:bg-ink disabled:opacity-55 disabled:cursor-not-allowed disabled:transform-none shadow-sm"
+            style={{ fontSize: '12.5px' }}
+          >
+            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.602 10.602z" /></svg>
             {analyzingNotice ? (lang === 'es' ? 'Analizando...' : 'Analyzing...') : (lang === 'es' ? 'Explicar Aviso' : 'Explain Notice')}
           </button>
           {noticeResult && (
-            <div style={{ background: 'white', border: '1.5px solid #DDD8C4', borderRadius: 8, padding: 14, fontSize: '12.5px', lineHeight: 1.6, maxHeight: 220, overflowY: 'auto', color: '#17243A' }}>
+            <div className="bg-white border border-rule rounded-lg p-3.5 text-xs md:text-sm leading-relaxed max-h-56 overflow-y-auto text-ink shadow-inner">
               {noticeResult}
             </div>
           )}
         </div>
       )}
 
-      {/* Checklist Tab */}
+      {/* Checklist Tab Body */}
       {activeTab === 'checklist' && (
-        <div style={{ padding: 16, display: 'flex', flexDirection: 'column', gap: 10, overflowY: 'auto', maxHeight: 450 }}>
-          <h3 style={{ fontSize: 13, fontWeight: 800, color: '#17243A' }}>{lang === 'es' ? 'Su Lista de Defensa' : 'Your Eviction Defense Checklist'}</h3>
-          <p style={{ fontSize: '11.5px', color: '#64748b', lineHeight: 1.45 }}>{lang === 'es' ? 'Marque los pasos completados para mantenerse en camino.' : 'Check off completed steps to stay on track.'}</p>
+        <div className="p-4 flex flex-col gap-3 overflow-y-auto" style={{ maxHeight: '450px' }}>
+          <h3 className="text-xs font-bold text-ink" style={{ fontSize: '13px' }}>{lang === 'es' ? 'Su Lista de Defensa' : 'Your Eviction Defense Checklist'}</h3>
+          <p className="text-3xs text-slate-500 leading-relaxed" style={{ fontSize: '11.5px' }}>{lang === 'es' ? 'Marque los pasos completados para mantenerse en camino.' : 'Check off completed steps to stay on track.'}</p>
           {[
             lang === 'es' ? 'Llame a LSNJLAW al 1-888-576-5529' : 'Call LSNJLAW Legal Aid hotline at 1-888-576-5529',
             lang === 'es' ? 'Reúna todos los recibos de renta, estados de cuenta bancarios y registros de pago.' : 'Gather all rent receipts, bank statements, lease contracts, and payment records.',
             lang === 'es' ? 'Fotografíe cualquier documento publicado en su puerta con prueba de fecha y hora.' : 'Photograph any document/notice posted on your door with date and time proof.',
           ].map((label, i) => (
-            <label key={i} style={{ display: 'flex', gap: 8, alignItems: 'flex-start', background: 'white', padding: 10, border: '1.5px solid #DDD8C4', borderRadius: 8, fontSize: 12, lineHeight: 1.4, cursor: 'pointer', textDecoration: checklist[i] ? 'line-through' : 'none', color: checklist[i] ? '#94a3b8' : '#17243A' }}>
-              <input type="checkbox" checked={checklist[i]} onChange={() => toggleCheck(i)} style={{ marginTop: 2.5, cursor: 'pointer', accentColor: '#2D6A4F' }} />
+            <label 
+              key={i} 
+              className={`flex gap-2 items-start bg-white p-2.5 border border-rule rounded-lg text-xs leading-normal cursor-pointer select-none transition ${checklist[i] ? 'line-through text-slate-400' : 'text-ink hover:bg-slate-50'}`}
+            >
+              <input 
+                type="checkbox" 
+                checked={checklist[i]} 
+                onChange={() => toggleCheck(i)} 
+                className="mt-0.5 cursor-pointer"
+                style={{ accentColor: 'var(--color-margin)' }}
+              />
               <span>{label}</span>
             </label>
           ))}
         </div>
       )}
 
-      {/* Footer */}
-      <div style={{ padding: '10px 16px 12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #DDD8C4', background: '#fff' }}>
-        <span style={{ fontSize: 10, color: '#64748b', fontWeight: 500 }}>{lang === 'es' ? 'No es asesoría legal • Solo ley de NJ' : 'Not legal advice • NJ law only'}</span>
-        <Link to="/ai-assistant" style={{ fontSize: '10.5px', fontWeight: 700, color: '#2D6A4F', textDecoration: 'none' }}>{lang === 'es' ? 'Abrir app →' : 'Open Full App →'}</Link>
+      {/* Footer Row */}
+      <div className="px-4 py-2.5 border-t border-rule bg-white flex justify-between items-center">
+        <span className="text-4xs text-slate-500 font-medium" style={{ fontSize: '10px' }}>{lang === 'es' ? 'No es asesoría legal • Solo ley de NJ' : 'Not legal advice • NJ law only'}</span>
+        <Link to="/ai-assistant" className="text-3xs font-bold text-margin hover:underline" style={{ fontSize: '10.5px' }}>{lang === 'es' ? 'Abrir app →' : 'Open Full App →'}</Link>
       </div>
-
-      <style>{`@keyframes bounce { 0%,80%,100%{transform:translateY(0);opacity:.5}40%{transform:translateY(-4px);opacity:1} }`}</style>
     </div>
   )
 }
@@ -217,15 +251,12 @@ function ExtensionMockup() {
 // -----------------------------------
 function FeatureCard({ icon, title, desc }: { icon: React.ReactNode; title: string; desc: string }) {
   return (
-    <div style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 16, padding: '24px 20px', backdropFilter: 'blur(8px)', transition: 'background 0.2s', cursor: 'default' }}
-      onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.09)')}
-      onMouseLeave={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.05)')}
-    >
-      <div style={{ width: 44, height: 44, background: 'rgba(45,106,79,0.2)', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 14, color: '#6ee7b7' }}>
+    <div className="border border-rule rounded-xl p-6 bg-white/60 shadow-sm hover:bg-white transition duration-200 cursor-default">
+      <div className="w-11 h-11 bg-margin/10 text-margin rounded-lg flex items-center justify-center mb-4.5">
         {icon}
       </div>
-      <h3 style={{ fontSize: 15, fontWeight: 700, color: 'white', marginBottom: 8 }}>{title}</h3>
-      <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.65)', lineHeight: 1.65 }}>{desc}</p>
+      <h3 className="text-base font-bold text-ink mb-2">{title}</h3>
+      <p className="text-sm text-ink/75 leading-relaxed">{desc}</p>
     </div>
   )
 }
@@ -277,138 +308,135 @@ export function ExtensionPage() {
   ]
 
   return (
-    <div style={{ minHeight: '100vh', background: '#0f1a28', color: 'white', fontFamily: "'Plus Jakarta Sans', -apple-system, sans-serif" }}>
+    <section className="shell page-section">
+      
+      {/* Page Header Introduction */}
+      <PageIntro 
+        eyebrow={isEs ? 'Extensión de Navegador' : 'Browser Extension'} 
+        title={isEs ? 'Su asistente legal, siempre a su alcance' : 'Your Legal Assistant, Always at Hand'}
+      >
+        <p>
+          {isEs
+            ? 'El asistente de derechos de inquilinos de NJ impulsado por IA que funciona directamente en su navegador. Explique avisos, pregunte sobre sus derechos y obtenga orientación legal instantánea, sin importar en qué página esté.'
+            : 'The AI-powered NJ tenant rights assistant that works directly in your browser. Decode notices, ask about your rights, and get instant legal guidance — no matter what page you\'re on.'}
+        </p>
+      </PageIntro>
 
-      {/* Hero Section */}
-      <div style={{ position: 'relative', overflow: 'hidden', paddingTop: 80, paddingBottom: 80 }}>
-        {/* Background glow */}
-        <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 80% 60% at 50% -20%, rgba(45,106,79,0.25) 0%, transparent 70%)', pointerEvents: 'none' }} />
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
-          
-          {/* Left: Hero copy */}
-          <div>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(45,106,79,0.15)', border: '1px solid rgba(45,106,79,0.3)', borderRadius: 100, padding: '6px 14px', marginBottom: 24 }}>
-              <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#6ee7b7', display: 'inline-block', boxShadow: '0 0 8px #6ee7b7' }} />
-              <span style={{ fontSize: 12, fontWeight: 700, color: '#6ee7b7', letterSpacing: '0.05em', textTransform: 'uppercase' }}>{isEs ? 'Chrome Extension • Gratis' : 'Chrome Extension • Free'}</span>
-            </div>
-
-            <h1 style={{ fontSize: 52, fontWeight: 900, lineHeight: 1.08, letterSpacing: '-0.03em', marginBottom: 20, background: 'linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.7) 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-              {isEs ? 'Sus derechos,\nsiempre\na su alcance.' : 'Your rights,\nalways at\nyour fingertips.'}
-            </h1>
-
-            <p style={{ fontSize: 18, color: 'rgba(255,255,255,0.65)', lineHeight: 1.65, marginBottom: 36, maxWidth: 480 }}>
-              {isEs
-                ? 'El asistente de derechos de inquilinos de NJ impulsado por IA que funciona directamente en su navegador. Explique avisos, pregunte sobre sus derechos y obtenga orientación legal instantánea, sin importar en qué página esté.'
-                : 'The AI-powered NJ tenant rights assistant that works directly in your browser. Decode notices, ask about your rights, and get instant legal guidance — no matter what page you\'re on.'}
-            </p>
-
-            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-              <a
-                href="https://github.com/Iceman-Dann/Right-to-Stay-NJ"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#2D6A4F', color: 'white', padding: '14px 26px', borderRadius: 12, fontWeight: 700, fontSize: 15, textDecoration: 'none', border: 'none', cursor: 'pointer', transition: 'all 0.2s', boxShadow: '0 4px 20px rgba(45,106,79,0.4)' }}
-                onMouseEnter={e => { e.currentTarget.style.background = '#1a4a37'; e.currentTarget.style.transform = 'translateY(-2px)' }}
-                onMouseLeave={e => { e.currentTarget.style.background = '#2D6A4F'; e.currentTarget.style.transform = 'translateY(0)' }}
-              >
-                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" /></svg>
-                {isEs ? 'Ver en GitHub' : 'View on GitHub'}
-              </a>
-              <a
-                href="https://www.righttostaynj.org/support"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.85)', padding: '14px 26px', borderRadius: 12, fontWeight: 700, fontSize: 15, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.15)', cursor: 'pointer', transition: 'all 0.2s' }}
-                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.14)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
-                onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.08)'; e.currentTarget.style.transform = 'translateY(0)' }}
-              >
-                {isEs ? '¿Necesita ayuda?' : 'Need Support?'}
-              </a>
-            </div>
-
-            <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginTop: 32 }}>
-              {[
-                { label: isEs ? '100% Gratis' : '100% Free', icon: '🎁' },
-                { label: isEs ? 'Código abierto' : 'Open Source', icon: '🔓' },
-                { label: isEs ? 'Privacidad primero' : 'Privacy First', icon: '🔒' },
-              ].map(b => (
-                <div key={b.label} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, color: 'rgba(255,255,255,0.55)', fontWeight: 600 }}>
-                  <span>{b.icon}</span><span>{b.label}</span>
-                </div>
-              ))}
-            </div>
+      {/* Hero Layout: Action details + Live Mockup */}
+      <div className="grid gap-12 md:grid-cols-2 items-center mt-12 border-b border-rule pb-16">
+        
+        {/* Left Column: Promotion Info */}
+        <div className="space-y-6">
+          <div className="inline-flex items-center gap-2 bg-margin/10 border border-margin/20 rounded-full px-4 py-1.5">
+            <span className="w-2 h-2 rounded-full bg-margin animate-pulse" />
+            <span className="text-xs font-bold text-margin uppercase tracking-wider">{isEs ? 'Extensión de Chrome • Gratis' : 'Chrome Extension • Free'}</span>
           </div>
 
-          {/* Right: Live Extension Mockup */}
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <div style={{ position: 'relative' }}>
-              {/* Glow behind popup */}
-              <div style={{ position: 'absolute', inset: -40, background: 'radial-gradient(ellipse at center, rgba(45,106,79,0.2) 0%, transparent 70%)', pointerEvents: 'none', zIndex: 0 }} />
-              <div style={{ position: 'relative', zIndex: 1 }}>
-                <ExtensionMockup />
-              </div>
+          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-ink leading-tight">
+            {isEs 
+              ? 'Tome control de su defensa desde cualquier página web' 
+              : 'Take Control of Your Defense from Any Webpage'}
+          </h2>
+
+          <p className="text-sm md:text-base text-ink/80 leading-relaxed max-w-lg">
+            {isEs
+              ? 'Nuestra extensión de navegador pone todo el poder de Right to Stay NJ en su barra de herramientas. Resalte cláusulas complejas en correos, contratos de arrendamiento o portales de la corte para decodificarlas instantáneamente.'
+              : 'Our browser extension puts the full power of Right to Stay NJ directly into your toolbar. Highlight complex clauses in emails, lease contracts, or court portals to decode them instantly.'}
+          </p>
+
+          {/* Action Links using layout buttons */}
+          <div className="flex flex-wrap gap-4 pt-4">
+            <a
+              href="https://github.com/Iceman-Dann/Right-to-Stay-NJ"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="primary-cta mt-0"
+            >
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" /></svg>
+              <span>{isEs ? 'Ver en GitHub' : 'View on GitHub'}</span>
+            </a>
+            <Link
+              to="/support"
+              className="secondary-button inline-flex items-center justify-center gap-2"
+            >
+              <span>{isEs ? 'Centro de Soporte' : 'Support Center'}</span>
+            </Link>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-6 pt-4 text-xs text-ink/60 font-semibold">
+            <div className="flex items-center gap-1">🎁 {isEs ? '100% Gratis' : '100% Free'}</div>
+            <div className="flex items-center gap-1">🔓 {isEs ? 'Código Abierto' : 'Open Source'}</div>
+            <div className="flex items-center gap-1">🔒 {isEs ? 'Privacidad Absoluta' : 'Privacy First'}</div>
+          </div>
+        </div>
+
+        {/* Right Column: Interactive Mockup Card */}
+        <div className="flex justify-center md:justify-end">
+          <div className="relative">
+            <div className="absolute -inset-4 bg-margin/5 rounded-2xl blur-xl pointer-events-none" />
+            <div className="relative">
+              <ExtensionMockup />
             </div>
           </div>
         </div>
+
       </div>
 
-      {/* How it works */}
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '80px 24px' }}>
-        <div style={{ textAlign: 'center', marginBottom: 56 }}>
-          <p style={{ fontSize: 12, fontWeight: 700, color: '#6ee7b7', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>{isEs ? 'Cómo funciona' : 'How it works'}</p>
-          <h2 style={{ fontSize: 38, fontWeight: 900, letterSpacing: '-0.03em', color: 'white' }}>{isEs ? 'Ayuda legal en 3 pasos' : 'Legal help in 3 steps'}</h2>
+      {/* How it works Section */}
+      <div className="py-16 border-b border-rule">
+        <div className="text-center mb-12">
+          <span className="eyebrow">{isEs ? 'Paso a paso' : 'Step-by-Step'}</span>
+          <h2 className="text-2xl md:text-3xl font-extrabold text-ink mt-2">{isEs ? 'Instalación y Uso Simple' : 'Simple Installation & Usage'}</h2>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
+        <div className="grid gap-6 md:grid-cols-3">
           {steps.map((s, i) => (
-            <div key={i} style={{ position: 'relative', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 16, padding: '32px 28px' }}>
-              {i < steps.length - 1 && <div style={{ position: 'absolute', right: -13, top: '50%', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.15)', fontSize: 24, zIndex: 2 }}>›</div>}
-              <div style={{ width: 52, height: 52, borderRadius: 16, background: 'linear-gradient(135deg, rgba(45,106,79,0.4), rgba(45,106,79,0.1))', border: '1px solid rgba(45,106,79,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22, fontWeight: 900, color: '#6ee7b7', marginBottom: 20 }}>{s.num}</div>
-              <h3 style={{ fontSize: 16, fontWeight: 800, color: 'white', marginBottom: 10 }}>{s.title}</h3>
-              <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.6)', lineHeight: 1.65 }}>{s.desc}</p>
+            <div key={i} className="border border-rule rounded-lg p-6 bg-white/60 shadow-sm relative">
+              <div className="w-12 h-12 rounded-lg bg-margin/10 border border-margin/20 flex items-center justify-center text-xl font-bold text-margin mb-4">{s.num}</div>
+              <h3 className="text-base font-bold text-ink mb-2">{s.title}</h3>
+              <p className="text-xs md:text-sm text-ink/75 leading-relaxed">{s.desc}</p>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Features Grid */}
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px 80px' }}>
-        <div style={{ textAlign: 'center', marginBottom: 56 }}>
-          <p style={{ fontSize: 12, fontWeight: 700, color: '#6ee7b7', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>{isEs ? 'Características' : 'Features'}</p>
-          <h2 style={{ fontSize: 38, fontWeight: 900, letterSpacing: '-0.03em', color: 'white' }}>{isEs ? 'Todo lo que necesita, ahí mismo' : 'Everything you need, right there'}</h2>
+      {/* Features Grid Section */}
+      <div className="py-16">
+        <div className="text-center mb-12">
+          <span className="eyebrow">{isEs ? 'Características Clave' : 'Key Features'}</span>
+          <h2 className="text-2xl md:text-3xl font-extrabold text-ink mt-2">{isEs ? 'Tome el control de su defensa' : 'Take Control of Your Defense'}</h2>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
+        <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
           {features.map((f, i) => <FeatureCard key={i} {...f} />)}
         </div>
       </div>
 
-      {/* CTA Banner */}
-      <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', padding: '80px 24px', textAlign: 'center' }}>
-        <div style={{ maxWidth: 600, margin: '0 auto' }}>
-          <h2 style={{ fontSize: 42, fontWeight: 900, letterSpacing: '-0.03em', color: 'white', marginBottom: 16 }}>
-            {isEs ? 'Conozca sus derechos hoy.' : 'Know your rights today.'}
+      {/* Footer CTA Banner */}
+      <div className="border-t border-rule py-16 text-center">
+        <div className="max-w-2xl mx-auto space-y-4">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-ink">
+            {isEs ? 'Comience a proteger su hogar hoy' : 'Start Protecting Your Home Today'}
           </h2>
-          <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.6)', lineHeight: 1.65, marginBottom: 36 }}>
-            {isEs ? 'Gratis para cada inquilino de NJ. Sin cuentas. Sin suscripciones. Solo orientación legal clara cuando más la necesita.' : 'Free for every NJ tenant. No accounts. No subscriptions. Just clear legal guidance when you need it most.'}
+          <p className="text-xs md:text-sm text-ink/75 leading-relaxed max-w-lg mx-auto">
+            {isEs 
+              ? 'Nuestra extensión es libre de costos, libre de anuncios y nunca recopila ni transmite sus datos. Es el compañero de defensa legal definitivo.' 
+              : 'Our extension is free of cost, free of ads, and never collects or transmits your data. It is the ultimate legal defense companion.'}
           </p>
-          <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
+          <div className="flex justify-center gap-4 pt-6">
             <a
               href="https://github.com/Iceman-Dann/Right-to-Stay-NJ"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#2D6A4F', color: 'white', padding: '16px 32px', borderRadius: 14, fontWeight: 800, fontSize: 16, textDecoration: 'none', boxShadow: '0 4px 24px rgba(45,106,79,0.5)', transition: 'all 0.2s' }}
-              onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(45,106,79,0.6)' }}
-              onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 24px rgba(45,106,79,0.5)' }}
+              className="primary-cta mt-0"
             >
-              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" /></svg>
-              {isEs ? 'Obtener en GitHub' : 'Get it on GitHub'}
+              <span>{isEs ? 'Obtener en GitHub' : 'Get it on GitHub'}</span>
             </a>
-            <Link to="/support" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.85)', padding: '16px 32px', borderRadius: 14, fontWeight: 800, fontSize: 16, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.15)', transition: 'all 0.2s' }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.14)' }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.08)' }}
-            >
-              {isEs ? 'Centro de ayuda' : 'Help Center'}
+            <Link to="/support" className="secondary-button inline-flex items-center justify-center">
+              <span>{isEs ? 'Soporte Técnico' : 'Technical Support'}</span>
             </Link>
           </div>
         </div>
       </div>
-    </div>
+
+    </section>
   )
 }
