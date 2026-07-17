@@ -11,10 +11,18 @@ const EventSchema = z.object({
 })
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' })
-  const parsed = EventSchema.safeParse(req.body)
-  if (!parsed.success) return res.status(400).json({ error: 'Invalid structured event' })
-  const { eventType, county, noticeCategory, outcome } = parsed.data
-  await db.insert(impactEvents).values({ eventType, county, noticeCategory, outcome, sourceChannel: 'web' })
-  return res.status(204).end()
+  try {
+    if (!process.env.DATABASE_URL) {
+      return res.status(500).json({ error: 'DATABASE_URL environment variable is missing on the server.' })
+    }
+    if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' })
+    const parsed = EventSchema.safeParse(req.body)
+    if (!parsed.success) return res.status(400).json({ error: 'Invalid structured event' })
+    const { eventType, county, noticeCategory, outcome } = parsed.data
+    await db.insert(impactEvents).values({ eventType, county, noticeCategory, outcome, sourceChannel: 'web' })
+    return res.status(204).end()
+  } catch (error: any) {
+    console.error('Events API error:', error)
+    return res.status(500).json({ error: error.message || String(error) })
+  }
 }
