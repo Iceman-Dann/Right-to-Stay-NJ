@@ -104,13 +104,8 @@ function ExtensionMockup() {
       >
         {/* Mockup Header */}
         <div className="bg-white px-4 py-3 flex items-center gap-3 border-b border-rule sticky top-0 z-50">
-          <div className="w-8 h-8 bg-ink rounded-lg flex items-center justify-center shrink-0">
-            <svg width="18" height="18" viewBox="0 0 100 100" fill="none">
-              {/* Custom Logo: Green roof, Cream shield, Navy key cutout */}
-              <path d="M50 12 L90 42 L80 49 L50 26.5 L20 49 L10 42 Z" fill="#2D6A4F" />
-              <path d="M50 32 L80 42 V60 C80 75 50 88 50 88 C50 88 20 75 20 60 V42 Z" fill="#F7F5EF" />
-              <path d="M50 45 C46.7 45 44 47.7 44 51 C44 53.5 45.5 55.6 47.7 56.5 L47.7 73 C47.7 74.1 48.6 75 49.7 75 L52 75 C53.1 75 54 74.1 54 73 L54 70 H52 V67 H54 L54 64 H52 V61 L52.3 56.5 C54.5 55.6 56 53.5 56 51 C56 47.7 53.3 45 50 45 Z M50 48.5 C51.4 48.5 52.5 49.6 52.5 51 C52.5 52.4 51.4 53.5 50 53.5 C48.6 53.5 47.5 52.4 47.5 51 C47.5 49.6 48.6 48.5 50 48.5 Z" fill="#17243A" />
-            </svg>
+          <div className="w-8 h-8 flex items-center justify-center shrink-0">
+            <img src="/icon.svg" className="w-full h-full object-contain" alt="Logo" />
           </div>
         <div>
           <h1 className="text-sm font-extrabold tracking-tight m-0 p-0 text-ink" style={{ fontSize: '15px' }}>Right to Stay NJ</h1>
