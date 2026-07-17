@@ -6,6 +6,7 @@ import { Impact } from './routes/Impact'
 import { PrepareAnswer } from './routes/PrepareAnswer'
 import { AiAssistant } from './routes/AiAssistant'
 import { DraftLetters } from './routes/DraftLetters'
+import { Support } from './routes/Support'
 
 function RouteView() {
   const location = useLocation()
@@ -58,6 +59,10 @@ function RouteView() {
         title = 'About the Right to Stay NJ Project | Right to Stay NJ'
         description = 'An independent housing portal created to help NJ tenants understand official eviction summonses and connect with legal aid counsel.'
         break
+      case '/support':
+        title = 'Extension Support & Troubleshooting | Right to Stay NJ'
+        description = 'Need help with the Right to Stay NJ Chrome extension? Access our FAQ database or open a support ticket on GitHub.'
+        break
       case '/ai-assistant':
         title = 'Ask Llama 3.1 Tenant Q&A Rights Assistant | Right to Stay NJ'
         description = 'Get instant answers to NJ tenant questions, calculate caps, and build custom checklists with our AI rights assistant.'
@@ -84,6 +89,7 @@ function RouteView() {
         <Route path="/draft-letters" element={<DraftLetters />} />
         <Route path="/impact" element={<Impact />} />
         <Route path="/about" element={<About />} />
+        <Route path="/support" element={<Support />} />
         <Route path="/ai-assistant" element={<AiAssistant />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
