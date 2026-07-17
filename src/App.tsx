@@ -7,6 +7,7 @@ import { PrepareAnswer } from './routes/PrepareAnswer'
 import { AiAssistant } from './routes/AiAssistant'
 import { DraftLetters } from './routes/DraftLetters'
 import { Support } from './routes/Support'
+import { ExtensionPage } from './routes/ExtensionPage'
 
 function RouteView() {
   const location = useLocation()
@@ -63,6 +64,10 @@ function RouteView() {
         title = 'Extension Support & Troubleshooting | Right to Stay NJ'
         description = 'Need help with the Right to Stay NJ Chrome extension? Access our FAQ database or open a support ticket on GitHub.'
         break
+      case '/extension':
+        title = 'Chrome Extension | Right to Stay NJ — Tenant Rights in Your Browser'
+        description = 'Install the free Right to Stay NJ Chrome extension. Decode eviction notices, chat with an AI rights assistant, and get legal guidance on any webpage.'
+        break
       case '/ai-assistant':
         title = 'Ask Llama 3.1 Tenant Q&A Rights Assistant | Right to Stay NJ'
         description = 'Get instant answers to NJ tenant questions, calculate caps, and build custom checklists with our AI rights assistant.'
@@ -90,6 +95,7 @@ function RouteView() {
         <Route path="/impact" element={<Impact />} />
         <Route path="/about" element={<About />} />
         <Route path="/support" element={<Support />} />
+        <Route path="/extension" element={<ExtensionPage />} />
         <Route path="/ai-assistant" element={<AiAssistant />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

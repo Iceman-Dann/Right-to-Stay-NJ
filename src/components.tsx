@@ -295,6 +295,7 @@ export function Layout({ children }: { children: ReactNode }) {
     [t('nav_prepare_packet'), '/prepare-answer'],
     [t('nav_draft_letters'), '/draft-letters'],
     [t('nav_impact'), '/impact'],
+    [lang === 'es' ? 'Extensión' : 'Extension', '/extension'],
     [lang === 'es' ? 'Soporte' : 'Support', '/support'],
     [t('nav_about'), '/about'],
   ]
